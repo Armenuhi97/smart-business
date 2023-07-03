@@ -49,9 +49,12 @@ const SubMenu = (props: any) => {
   const [subnav, setSubnav] = useState(false);
   //  className={({ isActive }: any) => isActive ? 'active-item' : ''} 
   const showSubnav = () => setSubnav(!subnav);
+  // function logout() {
+  //   logout
+  // }
   return (
     <>
-      <SidebarLink  className={!props.item.path ? 'none-active' : ''}
+      <SidebarLink className={!props.item.path ? 'none-active' : ''}
         to={props.item.path ? props.item.path : '#'}
         onClick={() => {
           if (props.item.path === '/auth') {
