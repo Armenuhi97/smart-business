@@ -1,0 +1,10 @@
+$primary-color: #32a7e2;
+$dark-color: #2b314b;
+$btn-text-color: #ffffff;
+:root {    
+    .btn-primary {
+        --bs-btn-color: #ffffff;
+        --bs-btn-hover-color: #ffffff;
+        --bs-btn-active-color: #ffffff;
+    }
+}

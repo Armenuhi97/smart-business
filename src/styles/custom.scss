@@ -1,0 +1,15 @@
+// change the theme
+@import './variables.scss';
+
+$theme-colors: (
+  "primary": $primary-color,
+  "danger": #ff4136,
+  "dark": $dark-color,
+);
+
+.btn-primary{
+  color: $btn-text-color !important;
+}
+
+@import "~bootstrap/scss/bootstrap.scss";
+// @import "~react-bootstrap-sidebar-menu/dist/sidebar-menu.scss";

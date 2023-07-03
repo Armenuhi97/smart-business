@@ -1,0 +1,49 @@
+@import "./variables.scss";
+@import "react-toastify/dist/ReactToastify.css";
+
+.action-btn {
+    cursor: pointer;
+    svg {
+      color: black !important;
+    }
+  }
+  .red {
+    svg {
+      color: red !important;
+    }
+  }
+  
+  .message {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+  }
+  .w-150px {
+    width: 150px;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .file-item {
+    position: relative;
+    height: 30px;
+    width: 40px;
+    svg {
+      font-size: 18px;
+    }
+    label {
+      cursor: pointer;
+      position: absolute;
+      left: 0px;
+      right: 0;
+      bottom: 0;
+      top: 0;
+    }
+  }
+  .invalid {
+    .searchWrapper {
+      border-color: red !important;
+    }
+  }
