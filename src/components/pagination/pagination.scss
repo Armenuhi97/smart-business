@@ -1,0 +1,20 @@
+@import "../../styles/variables.scss";
+.page-link.active-item,
+.active-item > .page-link,
+.page-link {
+    outline: none !important;
+    box-shadow: none !important;
+    --bs-pagination-active-bg: $primary-color !important;
+    --bs-pagination-color: $primary-color !important;
+    --bs-pagination-active-border-color: $primary-color !important;
+    --bs-pagination-hover-color:$primary-color !important;
+}
+.page-link.active-item,
+.active-item > .page-link{
+    background-color: $primary-color !important;
+    color: $btn-text-color !important;
+}
+.pagination{
+    justify-content: flex-end;
+    margin-top: 20px;
+}

@@ -1,64 +1,53 @@
 import React from "react";
 import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
+import * as GiIcons from "react-icons/gi";
+import * as BiIcons from "react-icons/bi";
+import * as IoIcons from "react-icons/io";
+
 const mainRoute = '/dashboard';
 
 export const AdminData = [
-  // {
-  //   title: "Клиенты",
-  //   path: `${mainRoute}/users/3`,
-  //   icon: <AiIcons.AiOutlineUser />,
-  //   cName: "nav-text"
-  // },
-  // {
-  //   title: "Юридические клиенты",
-  //   path: `${mainRoute}/users/2`,
-  //   icon: <AiIcons.AiOutlineUser />,
-  //   cName: "nav-text"
-  // },
-  // {
-  //   title: "Модераторы",
-  //   path: `${mainRoute}/users/1`,
-  //   icon: <AiIcons.AiOutlineUser />,
-  //   cName: "nav-text"
-  // },
-  // {
-  //   title: "Видео",
-  //   path: `${mainRoute}/video`,
-  //   icon: <AiIcons.AiFillVideoCamera />,
-  //   cName: "nav-text"
-  // },
-  // {
-  //   title: "Компании",
-  //   path: `${mainRoute}/company`,
-  //   icon: <AiIcons.AiTwotoneBuild />,
-  //   cName: "nav-text"
-  // },
-  // {
-  //   title: "Настройки",
-  //   icon: <AiIcons.AiFillSetting />,
-  //   subNav: [
-  //     {
-  //       title: "Категории",
-  //       path: `${mainRoute}/category`,
-  //     },
-  //     {
-  //       title: "Страны",
-  //       path: `${mainRoute}/country`,
-  //     }
+  {
+    title: 'Հաճախորդ',
+    path: `${mainRoute}/users`,
+    icon: <AiIcons.AiOutlineUser />,
+    cName: "nav-text"
+  },
+    {
+    title: 'Հաշվապահ',
+    path: ``,
+    icon: <FaIcons.FaToiletPaper />,
+    cName: "nav-text"
+  },
 
-  //   ],
-  //   cName: "nav-text"
-  // },
-
-  // {
-  //   title: "Отзывы",
-  //   path: `${mainRoute}/review`,
-  //   icon: <AiIcons.AiFillStar />,
-  //   cName: "nav-text"
-  // },
+  {
+    title: 'Բռոկեր',
+    path: ``,
+    icon: <FaIcons.FaUserGraduate />,
+    cName: "nav-text"
+  },
+  {
+    title: 'Իրավաբան',
+    path: ``,
+    icon: <FaIcons.FaUserGraduate />,
+    cName: "nav-text"
+  },
+  {
+    title: 'Կազմակերպություններ',
+    path: ``,
+    icon: <GiIcons.GiPostOffice />,
+    cName: "nav-text"
+  },
+  {
+    title: 'Կարգավորումներ',
+    path: ``,
+    icon: <IoIcons.IoIosSettings />,
+    cName: "nav-text"
+  },
   {
     title: "Ելք",
-    icon: <AiIcons.AiOutlineLogout />,
+    icon: <BiIcons.BiLogOut />,
     path:'/auth',
     cName: "nav-text"
   },
