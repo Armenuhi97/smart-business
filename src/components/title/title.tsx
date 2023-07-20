@@ -11,7 +11,7 @@ function Title({ title, setModalShow, addTitle, isShowAdd = true }: TitleProps) 
         <div className="d-flex align-items-center justify-content-between" >
             <h1>{title}</h1>
             {isShowAdd && <Button variant="primary" onClick={() => setModalShow!(true)}>
-                {addTitle}
+                {addTitle ? addTitle : 'Ավելացնել'}
             </Button>}
         </div>
     )

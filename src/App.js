@@ -6,6 +6,7 @@ import PublicPage from './view/accessPage/publicPage.tsx';
 import Login from './view/login/login.tsx';
 import Main from './view/main/main';
 import ClientList from './view/client/client-list/client-list';
+import AddEditClient from './view/client/add-edit-client/add-edit-client';
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
         <Route path="dashboard" element={<PrivatePage><Main /></PrivatePage>}>
           <Route path="/dashboard" element={<Navigate to='users' />} />
           <Route path='users' element={<ClientList />}></Route>
+          <Route path='user-create' element={<AddEditClient />}></Route>
+
           {/* <Route path="users/:roleId" element={<OnlyAdminPage initialValue={initialValue.roleId}><User /></OnlyAdminPage>} >
               <Route path="" element={<Navigate to="list" />} />
               <Route path='list' element={<UserList />}></Route>
