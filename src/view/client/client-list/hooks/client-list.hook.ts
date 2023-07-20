@@ -26,7 +26,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
 
     const goToUserPage = (user?: IUser | boolean) => {
         // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
-        navigate(`/dashboard/user-create`);
+        navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : 'user/'+user?.id}`);
     }
 
 

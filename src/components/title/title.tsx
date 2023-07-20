@@ -8,7 +8,7 @@ interface TitleProps {
 }
 function Title({ title, setModalShow, addTitle, isShowAdd = true }: TitleProps) {
     return (
-        <div className="d-flex align-items-center justify-content-between" >
+        <div className={(!isShowAdd ? 'justify-content-center' : 'justify-content-between')+' d-flex align-items-center'} >
             <h1>{title}</h1>
             {isShowAdd && <Button variant="primary" onClick={() => setModalShow!(true)}>
                 {addTitle ? addTitle : 'Ավելացնել'}

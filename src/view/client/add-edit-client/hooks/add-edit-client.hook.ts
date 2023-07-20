@@ -109,7 +109,6 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
         resetForm,
         user,
         id: params.id,
-        role: params.roleId || ''
     }
 }
 export default UserPersonalProps;
