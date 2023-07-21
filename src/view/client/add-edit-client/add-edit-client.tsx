@@ -16,10 +16,11 @@ function AddEditClient() {
         setField,
         handleClose
     } = PopupHook<IUser>({
-        firstName: '',
-        lastName: '',
-        phoneNumber: '', email: '',
-        birthDate: ''
+        first_name: '',
+        last_name: '',
+        phone_number: '', email: '',
+        birth_date: '',
+        password:''
     });
 
     const {
@@ -40,12 +41,12 @@ function AddEditClient() {
                             <Form.Label>Անուն</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.firstName || ''}
-                                onChange={e => setField('firstName', e.target.value)}
-                                isInvalid={!!errors?.firstName}
+                                value={form.first_name || ''}
+                                onChange={e => setField('first_name', e.target.value)}
+                                isInvalid={!!errors?.first_name}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.firstName}
+                                {errors?.first_name}
                             </Form.Control.Feedback>
                         </div>
 
@@ -53,12 +54,12 @@ function AddEditClient() {
                             <Form.Label>Ազգանուն</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.lastName || ''}
-                                onChange={e => setField('lastName', e.target.value)}
-                                isInvalid={!!errors?.lastName}
+                                value={form.last_name || ''}
+                                onChange={e => setField('last_name', e.target.value)}
+                                isInvalid={!!errors?.last_name}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.lastName}
+                                {errors?.last_name}
                             </Form.Control.Feedback>
                         </div>
                         <div className='col'>
@@ -78,19 +79,19 @@ function AddEditClient() {
                         <div className='col'>
                             <Form.Label>Ծննդյան ամսաթիվ</Form.Label>
                             <div>
-                                <MyDatePicker wrapperClassName="datePicker" selectValue={form?.birthDate} setField={(e: Date) => setField('birthDate', e)} />
+                                <MyDatePicker wrapperClassName="datePicker" selectValue={form?.birth_date} setField={(e: Date) => setField('birth_date', e)} />
                             </div>
                         </div>
                         <div className='col'>
                             <Form.Label>Հեռախոսահամար</Form.Label>
                             <Form.Control
-                                type='text'
-                                value={form.phoneNumber || ''}
-                                onChange={e => setField('phoneNumber', e.target.value)}
-                                isInvalid={!!errors?.phoneNumber}
+                                type='number'
+                                value={form.phone_number || ''}
+                                onChange={e => setField('phone_number', e.target.value)}
+                                isInvalid={!!errors?.phone_number}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.phoneNumber}
+                                {errors?.phone_number}
                             </Form.Control.Feedback>
                         </div>
                         {!id && <div className='col'>
@@ -109,7 +110,7 @@ function AddEditClient() {
                     </div>
                 </Form.Group>
                 <div className='mt-3 justify-content-center d-flex'><Button onClick={handleSubmit}>Պահպանել</Button></div>
-            </Form >
+            </Form>
         </div>
     )
 }

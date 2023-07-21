@@ -26,9 +26,11 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
 
     const goToUserPage = (user?: IUser | boolean) => {
         // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
-        navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : 'user/'+user?.id}`);
+        navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : 'user/' + user?.id}`);
     }
-
+    const goToViewPage = (id: number) => {
+        navigate(`/dashboard/users/personal/${id}`);
+    }
 
     const handleGetUserList = useCallback((currentPage: number, isSetSearch?: boolean,
         searchValue: string = '') => {
@@ -43,7 +45,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         // }))
 
     }, [query, search]);
-    
+
     const deleteUser = useCallback((id: number) => {
 
     }, [])
@@ -62,7 +64,8 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         handleGetUserList,
         handlePageClick,
         goToUserPage,
-        title
+        title,
+        goToViewPage
     }
 }
 

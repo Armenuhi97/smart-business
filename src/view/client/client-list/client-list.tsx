@@ -31,7 +31,8 @@ function ClientList() {
         handleGetUserList,
         handlePageClick,
         goToUserPage,
-        title
+        title,
+        goToViewPage
     } = UserListProps(query, setSearch, setPage, search, dispatch, navigate, params);
 
     return (
@@ -56,13 +57,13 @@ function ClientList() {
                         return (
                             <tr key={user.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
-                                <td>{user.firstName} {user.lastName}</td>
-                                <td>{user.phoneNumber}</td>
+                                <td>{user.first_name} {user.last_name}</td>
+                                <td>{user.phone_number}</td>
                                 <td>{user.email}</td>
-                                <td>{user?.birthDate as string}</td>
+                                <td>{user?.birth_date as string}</td>
                                 <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
-                                <td></td>
+                                <td><span onClick={() => { goToViewPage(user.id!) }} className='action-btn'><AiIcons.AiOutlineEye /> </span></td>
 
                             </tr>
                         )

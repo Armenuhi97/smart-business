@@ -1,4 +1,14 @@
+@import "../../styles/variables.scss";
+
 .form-item {
     margin: 10px auto;
     text-align: center;
+}
+.title {
+    color: $dark-color;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
 }

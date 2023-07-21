@@ -51,6 +51,10 @@ function Login() {
     }
     return (
         <div>
+            <div className='mt-2 d-flex align-items-center justify-content-center'>
+                <img src="/images/icons/logo.svg" alt="" />
+                <span className="ml-2 title">Accounting</span>
+            </div>
             <Form style={{ width: '400px' }} className='form-item' onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Գաղտանուն</Form.Label>

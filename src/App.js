@@ -8,6 +8,7 @@ import Main from './view/main/main';
 import ClientList from './view/client/client-list/client-list';
 import AddEditClient from './view/client/add-edit-client/add-edit-client';
 import Client from './view/client/client';
+import ViewClient from './view/client/view-user/view-user';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Route path='list' element={<ClientList />}></Route>
             <Route path="user/:id" element={<AddEditClient />} />
             <Route path="create" element={<AddEditClient />} />
+            <Route path="personal/:id" element={<ViewClient />} />
+
           </Route>
         </Route>
 

@@ -22,7 +22,7 @@ export const AdminData = [
   },
 
   {
-    title: 'Բռոկեր',
+    title: 'Բրոքեր',
     path: ``,
     icon: <FaIcons.FaUserGraduate />,
     cName: "nav-text"

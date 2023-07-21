@@ -22,11 +22,11 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
     useEffect(() => {
         if (!!user && params.id) {
             const obj: IUser = {
-                firstName: user.firstName,
-                lastName: user.lastName,
+                first_name: user.first_name,
+                last_name: user.last_name,
                 email: user.email,
-                phoneNumber: user.phoneNumber,
-                birthDate: user.birthDate
+                phone_number: user.phone_number,
+                birth_date: user.birth_date
             }
 
             setForm({
@@ -37,11 +37,11 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
     }, [user, params.id])
 
     const findFormErrors = () => {
-        const { firstName, lastName, phoneNumber, email, password } = form;
+        const { first_name, last_name, phone_number, email, password } = form;
         const newErrors = {} as IUser;
-        if (!firstName || firstName.trim() === '') newErrors.firstName = ErrorMessage.required;
-        if (!lastName || lastName.trim() === '') newErrors.lastName = ErrorMessage.required;
-        if (!phoneNumber || phoneNumber.trim() === '') newErrors.phoneNumber = ErrorMessage.required;
+        if (!first_name || first_name.trim() === '') newErrors.first_name = ErrorMessage.required;
+        if (!last_name || last_name.trim() === '') newErrors.last_name = ErrorMessage.required;
+        if (!phone_number || phone_number.trim() === '') newErrors.phone_number = ErrorMessage.required;
         if (!email || email.trim() === '') newErrors.email = ErrorMessage.required;
         if (!params.id) {
             if (!password || password.trim() === '') newErrors.password = ErrorMessage.required;
@@ -93,7 +93,7 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
     const handelOnSave = (): void => {
         resetForm();
         navigate({
-            pathname: `dashboard/users/${params.roleId}`
+            pathname: `dashboard/users/list`
         });
     }
 
