@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { IOrganization } from "../model/organozation.model";
-import { getUserOrganizations } from "../slice/organization.slice";
 import { useParams } from "react-router-dom";
 import { IParams } from "../../../../../../models/params.model";
+import { getUserOrganizations } from "../slice/organization.slice";
 
 export function OrganizationProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
     // const users: IUser[] = useAppSelector((state) => state.allUsers.results);
@@ -24,7 +24,7 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
         handleGetOrganizationList(currentPage, true, currentSearch);
     }, [query]);
 
-    const goToUserPage = (user?: IOrganization | boolean) => {
+    const goToOrganizationPage = (user?: IOrganization | boolean) => {
         // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
     }
 
@@ -35,16 +35,10 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
         const paramsObject: IParams = {
             page: currentPage,
             id: +params!.id!
-            // query: isSetSearch ? searchValue : search,
-            // roleId: roleParams.roleId
         }
         dispatch(getUserOrganizations(paramsObject)).then((data: any) => {
-            setOrganization(data.payload.results);
-            setCount(data.payload.count);
-
-            // if (!data.payload.company) {
-            //     goToVacancyPage();
-            // }
+            // setOrganization(data.payload.results);
+            // setCount(data.payload.count);
         });
 
     }, [query, search]);
@@ -66,7 +60,7 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
         count,
         handleGetOrganizationList,
         handlePageClick,
-        goToUserPage,
+        goToOrganizationPage,
         deleteOrganization
     }
 }

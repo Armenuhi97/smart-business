@@ -4,6 +4,7 @@ import moment from "moment";
 import PersonalUser from "./components/personal";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import OrganizationList from "./components/organization/organization";
 
 function ViewUser() {
     const {
@@ -19,6 +20,7 @@ function ViewUser() {
             // onSelect={(k) => changeTab(k)}
             >
                 <Tab eventKey="organization" title="Կազմակերպություններ">
+                    <OrganizationList />
                 </Tab>
                 <Tab eventKey="staff" title="Աշխատակիցներ">
                 </Tab>
