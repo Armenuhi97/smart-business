@@ -1,16 +1,16 @@
 import React from "react";
 import ListHook from "../../../../../utils/hooks/list.hook";
-import { IOrganization } from "./model/organozation.model";
-import OrganizationProps from "./hooks/organization.hook";
+import { IEmployee } from "./model/employee.model";
 import { Table } from "react-bootstrap";
 import { pageCount } from "../../../../../services/API";
 import Paginate from "../../../../../components/pagination/pagination";
 import DeleteConfirmComponent from "../../../../../components/delete-confim/delete-confirm.component";
 import Title from "../../../../../components/title/title";
-import AddEditOrganization from './component/add-edit-organization';
 import * as AiIcons from "react-icons/ai";
+import EmployeeProps from "./hooks/employee.hook";
+import AddEditEmployee from "./component/add-edit-employee";
 
-function OrganizationList() {
+function EmployeeList() {
     const {
         page,
         setPage,
@@ -29,26 +29,27 @@ function OrganizationList() {
         handleSave, setModalShow,
         openModalForEditItem,
         deleteModalShow
-    } = ListHook<IOrganization>();
+    } = ListHook<IEmployee>();
     const {
-        organizations,
+        employees,
         count,
-        handleGetOrganizationList,
+        handleGetEmployeeList,
         handlePageClick,
-        goToOrganizationPage,
-        deleteOrganization
-    } = OrganizationProps(query, setSearch, setPage, search, dispatch, navigate, params);
+        deleteEmployee
+    } = EmployeeProps(query, setSearch, setPage, search, dispatch, navigate,params);
 
     return (
         <div>
-            <Title title='Կազմակերպություններ' isShowAdd={true} setModalShow={setModalShow} />
+            <Title title='Աշխատակիցներ' isShowAdd={true} setModalShow={setModalShow} />
 
-            {!!organizations?.length && <Table className='mt-2' striped bordered hover>
+            {!!employees?.length && <Table className='mt-2' striped bordered hover>
                 <thead>
                     <tr>
                         <th>N</th>
                         <th>ԱՆուն</th>
-                        <th>ՀՎՀՀ</th>
+                        <th>Ազգանուն</th>
+                        <th>Էլ․ հասցե</th>
+                        <th>Հեռ․</th>
                         <th></th>
                         <th></th>
                         {/* <th></th>
@@ -56,14 +57,17 @@ function OrganizationList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {organizations.map((organization: IOrganization, ind: number) => {
+                    {employees.map((employee: IEmployee, ind: number) => {
                         return (
-                            <tr key={organization.id}>
+                            <tr key={employee.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
-                                <td>{organization.name}</td>
-                                <td>{organization.hvhh}</td>
-                                <td><div onClick={() => { openModalForEditItem(organization) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
-                                <td><span onClick={() => handelOpenDeleteConfirmModal(organization.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
+                                <td>{employee.name}</td>
+                                <td>{employee.surname}</td>
+                                <td>{employee.email}</td>
+                                <td>{employee.phoneNumber}</td>
+                                <td><div onClick={() => { openModalForEditItem(employee) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
+
+                                <td><span onClick={() => handelOpenDeleteConfirmModal(employee.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
 
                                 {/* <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td> */}
@@ -74,19 +78,19 @@ function OrganizationList() {
                 </tbody>
             </Table>
             }
-            {!!organizations?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count / pageCount)} />}
+            {!!employees?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count / pageCount)} />}
             <DeleteConfirmComponent
                 show={deleteModalShow}
                 handleClose={handleCloseDeleteModal}
-                onSave={() => handleDeleteItem(organizations, handleGetOrganizationList, handlePageClick, deleteOrganization)}
+                onSave={() => handleDeleteItem(employees, handleGetEmployeeList, handlePageClick, deleteEmployee)}
             />
-            <AddEditOrganization
+            <AddEditEmployee
                 editItem={editItem}
                 show={modalShow}
                 onHide={handleClose}
-                onSave={(evt: any) => handleSave(evt, handleGetOrganizationList, handlePageClick)}
+                onSave={(evt: any) => handleSave(evt, handleGetEmployeeList, handlePageClick)}
             />
         </div>
     )
 }
-export default OrganizationList;
+export default EmployeeList;

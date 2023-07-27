@@ -5,6 +5,7 @@ import PersonalUser from "./components/personal";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OrganizationList from "./components/organization/organization";
+import EmployeeList from "./components/employee/employee";
 
 function ViewUser() {
     const {
@@ -23,6 +24,7 @@ function ViewUser() {
                     <OrganizationList />
                 </Tab>
                 <Tab eventKey="staff" title="Աշխատակիցներ">
+                    <EmployeeList />
                 </Tab>
                 <Tab eventKey="personal" title="Անձնական տվյալներ">
                     <PersonalUser user={user} />

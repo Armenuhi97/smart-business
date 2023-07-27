@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { IOrganization } from "../model/organozation.model";
 import { useParams } from "react-router-dom";
 import { IParams } from "../../../../../../models/params.model";
-import { getUserOrganizations } from "../slice/organization.slice";
+import { IEmployee } from "../model/employee.model";
+import { getUserEmployees } from "../slice/employee.slice";
 
-export function OrganizationProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any) {
-    const [organizations, setOrganization] = useState<IOrganization[]>([]);
+export function EmployeeProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any,params:any) {
+    const [employees, setEmployees] = useState<IEmployee[]>([]);
     const [count, setCount] = useState<number>(0);
 
     useEffect(() => {
@@ -17,28 +17,24 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
         const currentPage = queryPage ? +queryPage : 1;
         setPage(currentPage);
 
-        handleGetOrganizationList(currentPage, true, currentSearch);
+        handleGetEmployeeList(currentPage, true, currentSearch);
     }, [query]);
 
-    const goToOrganizationPage = (user?: IOrganization | boolean) => {
-        // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
-    }
 
-
-    const handleGetOrganizationList = useCallback((currentPage: number, isSetSearch?: boolean,
+    const handleGetEmployeeList = useCallback((currentPage: number, isSetSearch?: boolean,
         searchValue: string = '') => {
 
         const paramsObject: IParams = {
             page: currentPage,
             id: +params!.id!
         }
-        dispatch(getUserOrganizations(paramsObject)).then((data: any) => {
-            // setOrganization(data.payload.results);
+        dispatch(getUserEmployees(paramsObject)).then((data: any) => {
+            // setEmployees(data.payload.results);
             // setCount(data.payload.count);
         });
 
     }, [query, search]);
-    const deleteOrganization = () => {
+    const deleteEmployee = () => {
 
     }
 
@@ -52,13 +48,12 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
     }, [search]);
 
     return {
-        organizations,
+        employees,
         count,
-        handleGetOrganizationList,
+        handleGetEmployeeList,
         handlePageClick,
-        goToOrganizationPage,
-        deleteOrganization
+        deleteEmployee
     }
 }
 
-export default OrganizationProps;
+export default EmployeeProps;
