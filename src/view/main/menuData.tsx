@@ -23,7 +23,7 @@ export const AdminData = [
 
   {
     title: 'Բրոքեր',
-    path: ``,
+    path: `${mainRoute}/broker`,
     icon: <FaIcons.FaBuilding />,
     cName: "nav-text"
   },

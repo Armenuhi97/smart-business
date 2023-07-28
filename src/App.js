@@ -13,6 +13,11 @@ import Accountant from './view/accountant/accountant';
 import AccountantList from './view/accountant/client-list/accountant-list';
 import ViewAccountant from './view/accountant/view-accountant/view-accountant';
 
+
+import Broker from './view/broker/broker';
+import BrokerList from './view/broker/broker-list/broker-list';
+import ViewBroker from './view/broker/view-broker/view-broker';
+
 function App() {
   return (
     <div className="App">
@@ -38,13 +43,19 @@ function App() {
             <Route path='list' element={<AccountantList />}></Route>
             <Route path="personal/:id" element={<ViewAccountant />} />
           </Route>
+
+          <Route path="broker" element={<Broker />} >
+            <Route path="" element={<Navigate to="list" />} />
+            <Route path='list' element={<BrokerList />}></Route>
+            <Route path="personal/:id" element={<ViewBroker />} />
+          </Route>
         </Route>
 
         {/* <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate replace to="/404" />} /> */}
 
       </Routes>
-    </div>
+    </div >
   );
 }
 

@@ -4,15 +4,15 @@ import Tabs from 'react-bootstrap/Tabs';
 import EmployeeList from "../../client/view-user/components/employee/employee";
 import PersonalUser from "../../client/view-user/components/personal";
 import PersonalUserHook from "../../client/view-user/hooks/personal-user.hook";
-import { IAccountant } from "../models/accountant.model";
-import PersonalAccountant from "./personal-accountant";
 import ClientList from "../../client/client-list/client-list";
+import { IBroker } from "../models/broker.model";
+import PersonalBroker from "./personal-broker";
 
-function ViewAccountant() {
+function ViewBroker() {
     const {
         user,
         paramsId
-    } = PersonalUserHook<IAccountant>();
+    } = PersonalUserHook<IBroker>();
     return (
         <div>
             <h5>{user?.organization_name}</h5>
@@ -30,11 +30,10 @@ function ViewAccountant() {
                     <ClientList paramsId={paramsId} />
                 </Tab>
                 {/*  */}
-                <Tab eventKey="broker" title="Բրոքեր"></Tab>
-                <Tab eventKey="lawyer" title="Իրավաբան"></Tab>
+                <Tab eventKey="accountant" title="Հաշվապահներ"></Tab>
                 {/*  */}
                 <Tab eventKey="personal" title="Անձնական տվյալներ">
-                    <PersonalAccountant user={user} />
+                    <PersonalBroker user={user} />
                 </Tab>
             </Tabs>
         </div>
@@ -42,4 +41,4 @@ function ViewAccountant() {
 
     )
 }
-export default ViewAccountant;
+export default ViewBroker;

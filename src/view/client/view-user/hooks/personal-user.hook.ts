@@ -15,7 +15,8 @@ function PersonalUserHook<B>() {
         }
     }, [params.id]);
     return {
-        user
+        user,
+        paramsId: params.id
     }
 }
 export default PersonalUserHook;

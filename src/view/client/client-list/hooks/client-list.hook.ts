@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../../hooks";
 import { IUser } from "../../models/user.model";
 import { getAllUsers } from "../../slice/all-clients.slice";
 
-export function UserListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
+export function UserListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params:any) {
     const users: IUser[] = useAppSelector((state) => state.allUsers.results);
     const count: number = useAppSelector((state) => state.allUsers.count);
 

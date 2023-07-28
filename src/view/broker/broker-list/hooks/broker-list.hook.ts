@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { IAccountant } from "../../models/accountant.model";
+import { IBroker } from "../../models/broker.model";
 import { useAppSelector } from "../../../../hooks";
 
-export function AccountantListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
-    const accountant: IAccountant[] = useAppSelector((state) => state.allAccountant.results);
-    const count: number = useAppSelector((state) => state.allAccountant.count);
-    const title = 'Հաշվապահներ';
+export function BrokerListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
+    const brokers: IBroker[] = useAppSelector((state) => state.allBrokers.results);
+    const count: number = useAppSelector((state) => state.allBrokers.count);
+
+    const title = 'Բրոքեր';
     useEffect(() => {
         document.title = title;
     });
@@ -19,18 +20,15 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
         const currentPage = queryPage ? +queryPage : 1;
         setPage(currentPage);
 
-        handleGetAccountantList(currentPage, true, currentSearch);
+        handleGetBrokerList(currentPage, true, currentSearch);
     }, [query]);
 
-    const goToUserPage = (user?: IAccountant | boolean) => {
-        // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
-        navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : 'user/' + user?.id}`);
-    }
+
     const goToViewPage = (id: number) => {
-        navigate(`/dashboard/accountant/personal/${id}`);
+        navigate(`/dashboard/broker/personal/${id}`);
     }
 
-    const handleGetAccountantList = useCallback((currentPage: number, isSetSearch?: boolean,
+    const handleGetBrokerList = useCallback((currentPage: number, isSetSearch?: boolean,
         searchValue: string = '') => {
 
         const params = {
@@ -44,9 +42,6 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
 
     }, [query, search]);
 
-    const deleteUser = useCallback((id: number) => {
-
-    }, [])
     const handlePageClick = useCallback((e: {
         selected: number, isSetSearch?: boolean, searchValue?: string, isSetCategory?: boolean
     }) => {
@@ -57,14 +52,13 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
     }, [search]);
 
     return {
-        accountant,
+        brokers,
         count,
-        handleGetAccountantList,
+        handleGetBrokerList,
         handlePageClick,
-        goToUserPage,
         title,
         goToViewPage
     }
 }
 
-export default AccountantListProps;
+export default BrokerListProps;

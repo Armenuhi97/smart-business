@@ -10,7 +10,7 @@ import { pageCount } from "../../../services/API";
 import DeleteConfirmModal from '../../../components/delete-confim/delete-confirm.component';
 import { deleteUser } from "../slice/client.slice";
 
-function ClientList() {
+function ClientList({ paramsId }: { paramsId: string | undefined }) {
     const {
         page,
         setPage,
