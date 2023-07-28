@@ -6,11 +6,12 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OrganizationList from "./components/organization/organization";
 import EmployeeList from "./components/employee/employee";
+import { IUser } from "../models/user.model";
 
 function ViewUser() {
     const {
         user
-    } = PersonalUserHook();
+    } = PersonalUserHook<IUser>();
     return (
         <div>
             <h5>{user?.first_name} {user.last_name}</h5>

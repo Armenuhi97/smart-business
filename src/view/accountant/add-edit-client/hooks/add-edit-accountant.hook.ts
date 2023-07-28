@@ -1,35 +1,34 @@
 import { useEffect } from "react";
-import { IEmployee } from "../model/employee.model";
-import { ErrorMessage } from "../../../../../../utils/error";
-import { IAdd, IModify } from "../../../../../../models/action.model";
-import { addEmployee, modifyEmployee } from "../slice/employee.slice";
+import { IAccountant } from "../../models/accountant.model";
+import { ErrorMessage } from "../../../../utils/error";
+import { IAdd, IModify } from "../../../../models/action.model";
+import { addAccountant, modifyAccountant } from "../../slice/accountant.slice";
 
-function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
+function AccountantPopupProps(editItem: IAccountant | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
     useEffect(() => {
         if (!!editItem) {
-            const companyObj: any = {
-                name: editItem.name,
-                surname: editItem.surname,
+            const accountant: IAccountant = {
                 email: editItem.email,
-                phoneNumber: editItem.phoneNumber
+                phone_number: editItem.phone_number,
+                hvhh: editItem.hvhh,
+                organization_name: editItem.organization_name
             }
 
             setForm({
                 ...form,
-                ...companyObj
+                ...accountant
             })
         }
     }, [editItem])
 
     const findFormErrors = () => {
-        const { name, surname, email, phoneNumber, password } = form;
-        const newErrors = {} as IEmployee;
-        if (!name || name.trim() === '') newErrors.name = ErrorMessage.required;
-        if (!surname || surname.trim() === '') newErrors.surname = ErrorMessage.required;
+        const { email, phone_number, hvhh, organization_name, password } = form;
+        const newErrors = {} as IAccountant;
         if (!email || email.trim() === '') newErrors.email = ErrorMessage.required;
-        if (!phoneNumber || phoneNumber.trim() === '') newErrors.phoneNumber = ErrorMessage.required;
+        if (!phone_number || phone_number.trim() === '') newErrors.phone_number = ErrorMessage.required;
+        if (!hvhh || hvhh.trim() === '') newErrors.hvhh = ErrorMessage.required;
+        if (!organization_name || organization_name.trim() === '') newErrors.organization_name = ErrorMessage.required;
         if (!password || password.trim() === '') newErrors.password = ErrorMessage.required;
-
         return newErrors;
     }
 
@@ -47,22 +46,22 @@ function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any,
             if (!!editItem) {
 
                 const editObject = editItem;
-                const sendingObject: IModify<IEmployee> = {
+                const sendingObject: IModify<IAccountant> = {
                     sendObject: {
                         ...formObject,
                     },
                     id: editObject.id,
                     updateSuccessfully: handelOnSave
                 }
-                dispatch(modifyEmployee(
+                dispatch(modifyAccountant(
                     sendingObject
                 ));
             } else {
-                const sendingObject: IAdd<IEmployee> = {
+                const sendingObject: IAdd<IAccountant> = {
                     sendData: formObject,
                     createSuccessfully: handelOnSave
                 }
-                dispatch(addEmployee(
+                dispatch(addAccountant(
                     sendingObject
                 ))
             }
@@ -83,8 +82,11 @@ function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any,
 
     const resetForm = () => {
         setForm({
-            title: '', description: '', logo: '', logoFile: null,
-            categories: []
+            email: '',
+            phone_number: '',
+            hvhh: '',
+            organization_name: '',
+            password:''
         })
     }
 
@@ -93,4 +95,4 @@ function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any,
         resetForm
     }
 }
-export default EmployeePopupProps;
+export default AccountantPopupProps;

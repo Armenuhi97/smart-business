@@ -16,7 +16,7 @@ export const AdminData = [
   },
     {
     title: 'Հաշվապահ',
-    path: ``,
+    path: `${mainRoute}/accountant`,
     icon: <FaIcons.FaToiletPaper />,
     cName: "nav-text"
   },
@@ -24,7 +24,7 @@ export const AdminData = [
   {
     title: 'Բրոքեր',
     path: ``,
-    icon: <FaIcons.FaUserGraduate />,
+    icon: <FaIcons.FaBuilding />,
     cName: "nav-text"
   },
   {

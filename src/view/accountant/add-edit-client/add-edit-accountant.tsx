@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 import { Form } from 'react-bootstrap';
-import { IEmployee } from '../model/employee.model';
-import PopupHook from '../../../../../../utils/hooks/popup.hook';
-import ModalContent from '../../../../../../components/modal-content/modal-content.component';
-import EmployeePopupProps from '../hooks/create-employee.hook';
+import PopupHook from '../../../utils/hooks/popup.hook';
+import AccountantPopupProps from './hooks/add-edit-accountant.hook';
+import { IAccountant } from '../models/accountant.model';
+import ModalContent from '../../../components/modal-content/modal-content.component';
 
-export default memo(function AddEditEmployee({ editItem, show, onHide, onSave }: any) {
+export default memo(function AddEditAccountant({ editItem, show, onHide, onSave }: any) {
     const {
         form,
         setForm,
@@ -14,41 +14,41 @@ export default memo(function AddEditEmployee({ editItem, show, onHide, onSave }:
         dispatch,
         setField,
         handleClose
-    } = PopupHook<IEmployee>({ name: '', surname: '', email: '', phoneNumber: '', password: '' }, onHide);
+    } = PopupHook<IAccountant>({ email: '', hvhh: '', organization_name: '', phone_number: '', password: '' }, onHide);
 
     const {
         handleSubmit,
         resetForm
-    } = EmployeePopupProps(editItem, setForm, form, dispatch, setErrors, onSave)
+    } = AccountantPopupProps(editItem, setForm, form, dispatch, setErrors, onSave)
 
 
     return (
-        <ModalContent show={show} title={'Աշխատակիցներ'} handleClose={() => handleClose(resetForm)} onSave={handleSubmit}>
+        <ModalContent show={show} title={'Հաշվապահներ'} handleClose={() => handleClose(resetForm)} onSave={handleSubmit}>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <div className='row'>
                         <div className='col'>
-                            <Form.Label>Անուն</Form.Label>
+                            <Form.Label>Կազմակերպության անուն</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.name}
+                                value={form.organization_name}
                                 onChange={e => setField('name', e.target.value)}
-                                isInvalid={!!errors?.name}
+                                isInvalid={!!errors?.organization_name}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.name}
+                                {errors?.organization_name}
                             </Form.Control.Feedback>
                         </div>
                         <div className='col'>
-                            <Form.Label>Ազգանուն</Form.Label>
+                            <Form.Label>ՀՎՀՀ</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.surname}
-                                onChange={e => setField('surname', e.target.value)}
-                                isInvalid={!!errors?.surname}
+                                value={form.hvhh}
+                                onChange={e => setField('hvhh', e.target.value)}
+                                isInvalid={!!errors?.hvhh}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.surname}
+                                {errors?.hvhh}
                             </Form.Control.Feedback>
                         </div>
                     </div>
@@ -57,12 +57,12 @@ export default memo(function AddEditEmployee({ editItem, show, onHide, onSave }:
                             <Form.Label>Հեռ․</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.phoneNumber}
-                                onChange={e => setField('phoneNumber', e.target.value)}
-                                isInvalid={!!errors?.phoneNumber}
+                                value={form.phone_number}
+                                onChange={e => setField('phone_number', e.target.value)}
+                                isInvalid={!!errors?.phone_number}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.phoneNumber}
+                                {errors?.phone_number}
                             </Form.Control.Feedback>
                         </div>
                         <div className='col'>
@@ -80,7 +80,7 @@ export default memo(function AddEditEmployee({ editItem, show, onHide, onSave }:
                         <div className='col'>
                             <Form.Label>Գաղտնաբառ</Form.Label>
                             <Form.Control
-                                type='text'
+                                type='password'
                                 value={form.password}
                                 onChange={e => setField('password', e.target.value)}
                                 isInvalid={!!errors?.password}

@@ -1,8 +1,7 @@
 import React from "react";
 import moment from "moment";
-import { IUser } from "../../models/user.model";
 
-function PersonalUser({ user }: { user: IUser }) {
+function PersonalUser({ user }: { user: any }) {
 
     return (
         <div className="text-start">

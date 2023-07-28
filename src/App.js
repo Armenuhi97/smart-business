@@ -9,6 +9,9 @@ import ClientList from './view/client/client-list/client-list';
 import AddEditClient from './view/client/add-edit-client/add-edit-client';
 import Client from './view/client/client';
 import ViewClient from './view/client/view-user/view-user';
+import Accountant from './view/accountant/accountant';
+import AccountantList from './view/accountant/client-list/accountant-list';
+import ViewAccountant from './view/accountant/view-accountant/view-accountant';
 
 function App() {
   return (
@@ -28,7 +31,12 @@ function App() {
             <Route path="user/:id" element={<AddEditClient />} />
             <Route path="create" element={<AddEditClient />} />
             <Route path="personal/:id" element={<ViewClient />} />
+          </Route>
 
+          <Route path="accountant" element={<Accountant />} >
+            <Route path="" element={<Navigate to="list" />} />
+            <Route path='list' element={<AccountantList />}></Route>
+            <Route path="personal/:id" element={<ViewAccountant />} />
           </Route>
         </Route>
 

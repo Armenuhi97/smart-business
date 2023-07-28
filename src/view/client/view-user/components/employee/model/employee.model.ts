@@ -4,4 +4,5 @@ export interface IEmployee {
     surname: string;
     email: string;
     phoneNumber: string;
+    password?: string;
 }
