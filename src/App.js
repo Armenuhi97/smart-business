@@ -13,10 +13,14 @@ import Accountant from './view/accountant/accountant';
 import AccountantList from './view/accountant/client-list/accountant-list';
 import ViewAccountant from './view/accountant/view-accountant/view-accountant';
 
-
 import Broker from './view/broker/broker';
 import BrokerList from './view/broker/broker-list/broker-list';
 import ViewBroker from './view/broker/view-broker/view-broker';
+
+import Lawyer from './view/lawyer/lawyer';
+import LawyerList from './view/lawyer/lawyer-list/lawyer-list';
+import ViewLawyer from './view/lawyer/view-lawyer/view-lawyer';
+
 
 function App() {
   return (
@@ -48,6 +52,12 @@ function App() {
             <Route path="" element={<Navigate to="list" />} />
             <Route path='list' element={<BrokerList />}></Route>
             <Route path="personal/:id" element={<ViewBroker />} />
+          </Route>
+
+          <Route path="lawyer" element={<Lawyer />} >
+            <Route path="" element={<Navigate to="list" />} />
+            <Route path='list' element={<LawyerList />}></Route>
+            <Route path="personal/:id" element={<ViewLawyer />} />
           </Route>
         </Route>
 

@@ -29,7 +29,7 @@ export const AdminData = [
   },
   {
     title: 'Իրավաբան',
-    path: ``,
+    path: `${mainRoute}/lawyer`,
     icon: <FaIcons.FaUserGraduate />,
     cName: "nav-text"
   },

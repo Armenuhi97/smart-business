@@ -7,6 +7,7 @@ import PersonalUserHook from "../../client/view-user/hooks/personal-user.hook";
 import ClientList from "../../client/client-list/client-list";
 import { IBroker } from "../models/broker.model";
 import PersonalBroker from "./personal-broker";
+import AccountantList from "../../accountant/client-list/accountant-list";
 
 function ViewBroker() {
     const {
@@ -29,9 +30,9 @@ function ViewBroker() {
                 <Tab eventKey="client" title="Հաճախորդներ">
                     <ClientList paramsId={paramsId} />
                 </Tab>
-                {/*  */}
-                <Tab eventKey="accountant" title="Հաշվապահներ"></Tab>
-                {/*  */}
+                <Tab eventKey="accountant" title="Հաշվապահներ">
+                    <AccountantList />
+                </Tab>
                 <Tab eventKey="personal" title="Անձնական տվյալներ">
                     <PersonalBroker user={user} />
                 </Tab>

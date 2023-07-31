@@ -28,10 +28,10 @@ export function EmployeeProps(query: URLSearchParams, setSearch: any, setPage: a
             page: currentPage,
             id: +params!.id!
         }
-        dispatch(getUserEmployees(paramsObject)).then((data: any) => {
+        // dispatch(getUserEmployees(paramsObject)).then((data: any) => {
             // setEmployees(data.payload.results);
             // setCount(data.payload.count);
-        });
+        // });
 
     }, [query, search]);
     const deleteEmployee = () => {
