@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { IOrganization } from "../model/organozation.model";
 import { useParams } from "react-router-dom";
-import { IParams } from "../../../../../../models/params.model";
 import { getUserOrganizations } from "../slice/organization.slice";
+import { IParams } from "../../../models/params.model";
 
 export function OrganizationProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any) {
     const [organizations, setOrganization] = useState<IOrganization[]>([]);
@@ -32,10 +32,10 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
             page: currentPage,
             id: +params!.id!
         }
-        dispatch(getUserOrganizations(paramsObject)).then((data: any) => {
+        // dispatch(getUserOrganizations(paramsObject)).then((data: any) => {
             // setOrganization(data.payload.results);
             // setCount(data.payload.count);
-        });
+        // });
 
     }, [query, search]);
     const deleteOrganization = () => {

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IOrganization } from "../model/organozation.model";
-import { ServerResponse } from "../../../../../../models/serve-response.model";
-import { IParams } from "../../../../../../models/params.model";
-import API, { pageCount } from "../../../../../../services/API";
-import { IAdd, IDelete, IModify } from "../../../../../../models/action.model";
+import { ServerResponse } from "../../../models/serve-response.model";
+import { IParams } from "../../../models/params.model";
+import API, { pageCount } from "../../../services/API";
+import { IAdd, IDelete, IModify } from "../../../models/action.model";
 
 const initialState: ServerResponse<IOrganization[]> = {
     results: [],

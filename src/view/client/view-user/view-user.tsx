@@ -4,9 +4,9 @@ import moment from "moment";
 import PersonalUser from "./components/personal";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import OrganizationList from "./components/organization/organization";
 import EmployeeList from "./components/employee/employee";
 import { IUser } from "../models/user.model";
+import OrganizationList from "../../organization/component/organization-list/organization-list";
 
 function ViewUser() {
     const {

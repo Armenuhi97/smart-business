@@ -2,8 +2,8 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IOrganization } from "../model/organozation.model";
 import { addOrganization, getOrganizationById, modifyOrganization } from "../slice/organization.slice";
-import { ErrorMessage } from "../../../../../../utils/error";
-import { IAdd, IModify } from "../../../../../../models/action.model";
+import { ErrorMessage } from "../../../utils/error";
+import { IAdd, IModify } from "../../../models/action.model";
 
 function OrganizationPopupProps(editItem: IOrganization | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
     const params = useParams();

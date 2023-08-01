@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import { Form } from 'react-bootstrap';
 import { IOrganization } from '../model/organozation.model';
-import PopupHook from '../../../../../../utils/hooks/popup.hook';
 import OrganizationPopupProps from '../hooks/create-organization.hook';
-import ModalContent from '../../../../../../components/modal-content/modal-content.component';
+import PopupHook from '../../../utils/hooks/popup.hook';
+import ModalContent from '../../../components/modal-content/modal-content.component';
 
 export default memo(function AddEditOrganization({ editItem, show, onHide, onSave }: any) {
     const {

@@ -35,7 +35,7 @@ export const AdminData = [
   },
   {
     title: 'Կազմակերպություններ',
-    path: ``,
+    path: `${mainRoute}/organization`,
     icon: <GiIcons.GiPostOffice />,
     cName: "nav-text"
   },

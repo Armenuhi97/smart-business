@@ -1,14 +1,15 @@
 import React from "react";
-import ListHook from "../../../../../utils/hooks/list.hook";
-import { IOrganization } from "./model/organozation.model";
-import OrganizationProps from "./hooks/organization.hook";
 import { Table } from "react-bootstrap";
-import { pageCount } from "../../../../../services/API";
-import Paginate from "../../../../../components/pagination/pagination";
-import DeleteConfirmComponent from "../../../../../components/delete-confim/delete-confirm.component";
-import Title from "../../../../../components/title/title";
-import AddEditOrganization from './component/add-edit-organization';
 import * as AiIcons from "react-icons/ai";
+import OrganizationProps from "../../hooks/organization.hook";
+import Title from "../../../../components/title/title";
+import { IOrganization } from "../../model/organozation.model";
+import { pageCount } from "../../../../services/API";
+import Paginate from "../../../../components/pagination/pagination";
+import DeleteConfirmComponent from "../../../../components/delete-confim/delete-confirm.component";
+import AddEditOrganization from "../add-edit-organization";
+import ListHook from "../../../../utils/hooks/list.hook";
+
 
 function OrganizationList() {
     const {

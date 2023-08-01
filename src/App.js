@@ -21,6 +21,8 @@ import Lawyer from './view/lawyer/lawyer';
 import LawyerList from './view/lawyer/lawyer-list/lawyer-list';
 import ViewLawyer from './view/lawyer/view-lawyer/view-lawyer';
 
+import Organization from './view/organization/organization';
+import OrganizationList from './view/organization/component/organization-list/organization-list';
 
 function App() {
   return (
@@ -59,7 +61,16 @@ function App() {
             <Route path='list' element={<LawyerList />}></Route>
             <Route path="personal/:id" element={<ViewLawyer />} />
           </Route>
+
+          
+          <Route path="organization" element={<Organization />} >
+            <Route path="" element={<Navigate to="list" />} />
+            <Route path='list' element={<OrganizationList />}></Route>
+            {/* <Route path="personal/:id" element={<ViewLawyer />} /> */}
+          </Route>
         </Route>
+
+        
 
         {/* <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate replace to="/404" />} /> */}
