@@ -14,7 +14,7 @@ export default memo(function AddEditOrganization({ editItem, show, onHide, onSav
         dispatch,
         setField,
         handleClose
-    } = PopupHook<IOrganization>({ name: '', hvhh: '' }, onHide);
+    } = PopupHook<IOrganization>({ name: '', tin: '' }, onHide);
 
     const {
         handleSubmit,
@@ -43,12 +43,12 @@ export default memo(function AddEditOrganization({ editItem, show, onHide, onSav
                             <Form.Label>ՀՎՀՀ</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.hvhh}
-                                onChange={e => setField('hvhh', e.target.value)}
-                                isInvalid={!!errors?.hvhh}
+                                value={form.tin}
+                                onChange={e => setField('tin', e.target.value)}
+                                isInvalid={!!errors?.tin}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.hvhh}
+                                {errors?.tin}
                             </Form.Control.Feedback>
                         </div>
                     </div>

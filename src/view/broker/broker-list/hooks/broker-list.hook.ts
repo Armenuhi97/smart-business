@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { IBroker } from "../../models/broker.model";
 import { useAppSelector } from "../../../../hooks";
+import { getAllBroker } from "../../slice/all-broker.slice";
 
 export function BrokerListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
     const brokers: IBroker[] = useAppSelector((state) => state.allBrokers.results);
@@ -36,9 +37,7 @@ export function BrokerListProps(query: URLSearchParams, setSearch: any, setPage:
             // query: isSetSearch ? searchValue : search,
             // roleId: roleParams.roleId
         }
-        // dispatch(getUserById(+params!.id!)).then((data: any) => {
-        //     setUser(data.payload.user);
-        // });
+        dispatch(getAllBroker(params))
 
     }, [query, search]);
 

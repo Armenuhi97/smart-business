@@ -1,5 +1,6 @@
 import React from "react";
 import './App.css';
+import '../src/styles/style.scss'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import PrivatePage from './view/accessPage/privatePage.tsx';
 import PublicPage from './view/accessPage/publicPage.tsx';

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAppSelector } from "../../../../hooks";
 import { ILawyer } from "../../models/lawyer.model";
+import { getAllLawyer } from "../../slice/all-lawyer.slice";
 
 export function LawyerListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
     const lawyers: ILawyer[] = useAppSelector((state) => state.allLawyers.results);
@@ -36,9 +37,7 @@ export function LawyerListProps(query: URLSearchParams, setSearch: any, setPage:
             // query: isSetSearch ? searchValue : search,
             // roleId: roleParams.roleId
         }
-        // dispatch(getUserById(+params!.id!)).then((data: any) => {
-        //     setUser(data.payload.user);
-        // });
+        dispatch(getAllLawyer(params));
 
     }, [query, search]);
 

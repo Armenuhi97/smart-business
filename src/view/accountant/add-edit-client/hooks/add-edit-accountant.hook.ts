@@ -10,8 +10,8 @@ function AccountantPopupProps(editItem: IAccountant | null, setForm: any, form: 
             const accountant: IAccountant = {
                 email: editItem.email,
                 phone_number: editItem.phone_number,
-                hvhh: editItem.hvhh,
-                organization_name: editItem.organization_name
+                tin: editItem.tin,
+                company_name: editItem.company_name
             }
 
             setForm({
@@ -22,12 +22,12 @@ function AccountantPopupProps(editItem: IAccountant | null, setForm: any, form: 
     }, [editItem])
 
     const findFormErrors = () => {
-        const { email, phone_number, hvhh, organization_name, password } = form;
+        const { email, phone_number, tin, company_name, password } = form;
         const newErrors = {} as IAccountant;
         if (!email || email.trim() === '') newErrors.email = ErrorMessage.required;
         if (!phone_number || phone_number.trim() === '') newErrors.phone_number = ErrorMessage.required;
-        if (!hvhh || hvhh.trim() === '') newErrors.hvhh = ErrorMessage.required;
-        if (!organization_name || organization_name.trim() === '') newErrors.organization_name = ErrorMessage.required;
+        if (!tin || tin.trim() === '') newErrors.tin = ErrorMessage.required;
+        if (!company_name || company_name.trim() === '') newErrors.company_name = ErrorMessage.required;
         if (!password || password.trim() === '') newErrors.password = ErrorMessage.required;
         return newErrors;
     }
@@ -84,8 +84,8 @@ function AccountantPopupProps(editItem: IAccountant | null, setForm: any, form: 
         setForm({
             email: '',
             phone_number: '',
-            hvhh: '',
-            organization_name: '',
+            tin: '',
+            company_name: '',
             password:''
         })
     }

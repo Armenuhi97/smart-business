@@ -15,7 +15,7 @@ function OrganizationPopupProps(editItem: IOrganization | null, setForm: any, fo
         if (!!editItem) {
             const companyObj: any = {
                 name: editItem.name,
-                hvhh: editItem.hvhh
+                tin: editItem.tin
             }
 
             setForm({
@@ -26,10 +26,10 @@ function OrganizationPopupProps(editItem: IOrganization | null, setForm: any, fo
     }, [editItem])
 
     const findFormErrors = () => {
-        const { name, hvhh } = form;
+        const { name, tin } = form;
         const newErrors = {} as IOrganization;
         if (!name || name.trim() === '') newErrors.name = ErrorMessage.required;
-        if (!hvhh || hvhh.trim() === '') newErrors.hvhh = ErrorMessage.required;
+        if (!tin || tin.trim() === '') newErrors.tin = ErrorMessage.required;
         return newErrors;
     }
 
@@ -44,7 +44,7 @@ function OrganizationPopupProps(editItem: IOrganization | null, setForm: any, fo
         } else {
             const formObject = {
                 name: form.name,
-                hvhh: form.hvhh
+                tin: form.tin
             }
 
             if (!!editItem) {

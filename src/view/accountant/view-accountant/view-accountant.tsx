@@ -16,7 +16,7 @@ function ViewAccountant() {
     } = PersonalUserHook<IAccountant>();
     return (
         <div>
-            <h5>{user?.organization_name}</h5>
+            <h5>{user?.company_name}</h5>
             <Tabs
                 defaultActiveKey="staff"
                 id="uncontrolled-tab-example"

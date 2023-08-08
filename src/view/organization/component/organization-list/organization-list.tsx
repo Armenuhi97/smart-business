@@ -62,7 +62,7 @@ function OrganizationList() {
                             <tr key={organization.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
                                 <td>{organization.name}</td>
-                                <td>{organization.hvhh}</td>
+                                <td>{organization.tin}</td>
                                 <td><div onClick={() => { openModalForEditItem(organization) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(organization.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
 

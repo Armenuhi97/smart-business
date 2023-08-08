@@ -14,7 +14,7 @@ export default memo(function AddEditBroker({ editItem, show, onHide, onSave }: a
         dispatch,
         setField,
         handleClose
-    } = PopupHook<IBroker>({ email: '', hvhh: '', organization_name: '', phone_number: '', password: '' }, onHide);
+    } = PopupHook<IBroker>({ email: '', tin: '', company_name: '', phone_number: '', password: '' }, onHide);
 
     const {
         handleSubmit,
@@ -31,24 +31,24 @@ export default memo(function AddEditBroker({ editItem, show, onHide, onSave }: a
                             <Form.Label>Կազմակերպության անուն</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.organization_name}
+                                value={form.company_name}
                                 onChange={e => setField('name', e.target.value)}
-                                isInvalid={!!errors?.organization_name}
+                                isInvalid={!!errors?.company_name}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.organization_name}
+                                {errors?.company_name}
                             </Form.Control.Feedback>
                         </div>
                         <div className='col'>
                             <Form.Label>ՀՎՀՀ</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.hvhh}
-                                onChange={e => setField('hvhh', e.target.value)}
-                                isInvalid={!!errors?.hvhh}
+                                value={form.tin}
+                                onChange={e => setField('tin', e.target.value)}
+                                isInvalid={!!errors?.tin}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.hvhh}
+                                {errors?.tin}
                             </Form.Control.Feedback>
                         </div>
                     </div>

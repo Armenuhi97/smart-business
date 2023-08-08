@@ -64,8 +64,8 @@ function AccountantList() {
                         return (
                             <tr key={user.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
-                                <td>{user.organization_name}</td>
-                                <td>{user.hvhh}</td>
+                                <td>{user.company_name}</td>
+                                <td>{user.tin}</td>
                                 <td>{user.email}</td>
                                 <td>{user.phone_number}</td>
                                 <td>{user.user_count}</td>

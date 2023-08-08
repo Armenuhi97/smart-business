@@ -3,6 +3,8 @@ import { ServerResponse } from "../../../models/serve-response.model";
 import API, { pageCount } from "../../../services/API";
 import { IParams } from "../../../models/params.model";
 import { IBroker } from "../models/broker.model";
+import { getRoleRequest } from "../../../utils/request/request";
+import { Roles } from "../../../utils/roles";
 
 const initialState: ServerResponse<IBroker[]> = {
     results: [],
@@ -12,18 +14,8 @@ const initialState: ServerResponse<IBroker[]> = {
 export const getAllBroker = createAsyncThunk(
     'get/all/brokers',
     async (data: IParams) => {
-        const response = await API.get(`broker/all/`,
-            {
-                params: {
-                    // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
-                    // take: data.isAll ? 100 : pageCount,
-                    limit: pageCount,
-                    offset: (data.page - 1) * 100
-                    // query: data.query,
-                    // role: data.roleId
-                }
-            })
-        return response.data
+        const response = await getRoleRequest(data, Roles.broker);
+        return response.data;
     }
 )
 
@@ -33,7 +25,7 @@ const allBrokerSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(getAllBroker.fulfilled, (state, action) => {
-            state.results = action.payload.results;
+            state.results = action.payload;
             state.count = action.payload.count;
         })
     },

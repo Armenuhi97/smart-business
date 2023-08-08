@@ -40,15 +40,13 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
             // query: isSetSearch ? searchValue : search,
             // roleId: roleParams.roleId
         }
-        // dispatch(getAllUsers({
-        //     ...params
-        // }))
+        dispatch(getAllUsers({
+            ...params
+        }))
 
     }, [query, search]);
 
-    const deleteUser = useCallback((id: number) => {
 
-    }, [])
     const handlePageClick = useCallback((e: {
         selected: number, isSetSearch?: boolean, searchValue?: string, isSetCategory?: boolean
     }) => {

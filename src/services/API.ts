@@ -56,20 +56,19 @@ API.interceptors.response.use(
         return res;
     },
     async (err) => {
-        removeLoaderElement();
-        if (err.response.status === 500) {
+        removeLoaderElement();        
+        if (err?.response?.status === 500) {
             toast.error(ErrorMessage.somethingWentWrong, {
                 position: toast.POSITION.TOP_RIGHT
             });
-        }
-
-        if (err.response.status === 400 || err.response.status === 409) {
+        }        
+        if (err?.response?.status === 400 || err?.response?.status === 409) {
             toast.error(err.response.data.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
         }
 
-        if (err.response.status === 403) {
+        if (err?.response?.status === 403) {
             logout();
         }
         return Promise.reject(err)

@@ -5,10 +5,11 @@ import { useAppDispatch } from "../../hooks";
 import { ErrorMessage } from "../../utils/error";
 import { ILogin } from "./models/login.model";
 import './login.scss';
+import { logIn } from "./slice/login.slice";
 
 function Login() {
     const navigate = useNavigate();
-    const [form, setForm] = useState({ username: '', password: '' });
+    const [form, setForm] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState({} as ILogin);
     const dispatch = useAppDispatch();
     const setField = (field: string, value: string) => {
@@ -19,9 +20,9 @@ function Login() {
     }
 
     const findFormErrors = (): ILogin => {
-        const { username, password } = form;
+        const { email, password } = form;
         const newErrors: ILogin = {} as ILogin;
-        if (!username || username === '') newErrors.username = ErrorMessage.required;
+        if (!email || email === '') newErrors.email = ErrorMessage.required;
         if (!password || password === '') newErrors.password = ErrorMessage.required;
 
         return newErrors;
@@ -29,19 +30,16 @@ function Login() {
 
     const handleSubmit = (e: any): void => {
         e.preventDefault();
-        const { username, password } = form;
+        const { email, password } = form;
         const newErrors = findFormErrors();
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors)
         } else {
-            localStorage.setItem('access', 'res.data.access_token');
-            goToDashboard();
-
-            // dispatch(logIn({
-            //     username,
-            //     password,
-            //     loggedInSuccessfully: () => { goToDashboard() }
-            // }))
+            dispatch(logIn({
+                email,
+                password,
+                loggedInSuccessfully: () => { goToDashboard() }
+            }))
 
         }
     }
@@ -57,14 +55,14 @@ function Login() {
             </div>
             <Form style={{ width: '400px' }} className='form-item' onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>Գաղտանուն</Form.Label>
+                    <Form.Label>Էլ․ հասցե</Form.Label>
                     <Form.Control
-                        type='text'
-                        onChange={e => setField('username', e.target.value)}
-                        isInvalid={!!errors?.username}
+                        type='email'
+                        onChange={e => setField('email', e.target.value)}
+                        isInvalid={!!errors?.email}
                     />
                     <Form.Control.Feedback type='invalid'>
-                        {errors?.username}
+                        {errors?.email}
                     </Form.Control.Feedback>
                 </Form.Group>
 

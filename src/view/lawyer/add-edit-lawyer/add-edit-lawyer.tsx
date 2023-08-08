@@ -14,7 +14,7 @@ export default memo(function AddEditLawyer({ editItem, show, onHide, onSave }: a
         dispatch,
         setField,
         handleClose
-    } = PopupHook<ILawyer>({ email: '', hvhh: '', organization_name: '', phone_number: '', password: '' }, onHide);
+    } = PopupHook<ILawyer>({ email: '', tin: '', company_name: '', phone_number: '', password: '' }, onHide);
 
     const {
         handleSubmit,
@@ -31,24 +31,24 @@ export default memo(function AddEditLawyer({ editItem, show, onHide, onSave }: a
                             <Form.Label>Կազմակերպության անուն</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.organization_name}
+                                value={form.company_name}
                                 onChange={e => setField('name', e.target.value)}
-                                isInvalid={!!errors?.organization_name}
+                                isInvalid={!!errors?.company_name}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.organization_name}
+                                {errors?.company_name}
                             </Form.Control.Feedback>
                         </div>
                         <div className='col'>
                             <Form.Label>ՀՎՀՀ</Form.Label>
                             <Form.Control
                                 type='text'
-                                value={form.hvhh}
-                                onChange={e => setField('hvhh', e.target.value)}
-                                isInvalid={!!errors?.hvhh}
+                                value={form.tin}
+                                onChange={e => setField('tin', e.target.value)}
+                                isInvalid={!!errors?.tin}
                             />
                             <Form.Control.Feedback type='invalid'>
-                                {errors?.hvhh}
+                                {errors?.tin}
                             </Form.Control.Feedback>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ export default memo(function AddEditLawyer({ editItem, show, onHide, onSave }: a
                                 {errors?.email}
                             </Form.Control.Feedback>
                         </div>
-                        <div className='col'>
+                        {!!editItem && <div className='col'>
                             <Form.Label>Գաղտնաբառ</Form.Label>
                             <Form.Control
                                 type='password'
@@ -88,7 +88,7 @@ export default memo(function AddEditLawyer({ editItem, show, onHide, onSave }: a
                             <Form.Control.Feedback type='invalid'>
                                 {errors?.password}
                             </Form.Control.Feedback>
-                        </div>
+                        </div>}
                     </div>
                 </Form.Group>
             </Form>

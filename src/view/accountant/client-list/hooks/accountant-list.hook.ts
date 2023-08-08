@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { IAccountant } from "../../models/accountant.model";
 import { useAppSelector } from "../../../../hooks";
+import { getAllAccountant } from "../../slice/all-accountant.slice";
 
 export function AccountantListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
     const accountant: IAccountant[] = useAppSelector((state) => state.allAccountant.results);
@@ -38,15 +39,14 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
             // query: isSetSearch ? searchValue : search,
             // roleId: roleParams.roleId
         }
-        // dispatch(getUserById(+params!.id!)).then((data: any) => {
+        dispatch(getAllAccountant(params));
+        // .then((data: any) => {
         //     setUser(data.payload.user);
         // });
 
     }, [query, search]);
 
-    const deleteUser = useCallback((id: number) => {
 
-    }, [])
     const handlePageClick = useCallback((e: {
         selected: number, isSetSearch?: boolean, searchValue?: string, isSetCategory?: boolean
     }) => {

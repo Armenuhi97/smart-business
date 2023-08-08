@@ -10,13 +10,13 @@ export const initialState: IAuth = {
 export const logIn = createAsyncThunk(
     'auth/login/admin',
     async (data: ILogin) => {
-        const res = await API.post('auth/login/role',
+        const res = await API.post('admin-login/',
             {
-                username: data.username,
+                email: data.email,
                 password: data.password
             });
-        if (res.status === 200 || res.status === 201 && res?.data?.access_token) {
-            localStorage.setItem('access', res.data.access_token);
+        if (res.status === 200 || res.status === 201 && res?.data?.access) {
+            localStorage.setItem('access', res.data.access);
             data.loggedInSuccessfully();
         }
         return res.data;

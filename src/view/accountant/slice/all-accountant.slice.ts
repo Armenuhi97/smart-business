@@ -3,6 +3,8 @@ import { IAccountant } from "../models/accountant.model";
 import { ServerResponse } from "../../../models/serve-response.model";
 import API, { pageCount } from "../../../services/API";
 import { IParams } from "../../../models/params.model";
+import { getRoleRequest } from "../../../utils/request/request";
+import { Roles } from "../../../utils/roles";
 
 const initialState: ServerResponse<IAccountant[]> = {
     results: [],
@@ -10,19 +12,9 @@ const initialState: ServerResponse<IAccountant[]> = {
 }
 
 export const getAllAccountant = createAsyncThunk(
-    'get/all/users',
+    'get/all/accountant',
     async (data: IParams) => {
-        const response = await API.get(`accountant/all/`,
-            {
-                params: {
-                    // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
-                    // take: data.isAll ? 100 : pageCount,
-                    limit: pageCount,
-                    offset: (data.page - 1) * 100
-                    // query: data.query,
-                    // role: data.roleId
-                }
-            })
+        const response = await getRoleRequest(data, Roles.accountant);
         return response.data
     }
 )
@@ -32,8 +24,8 @@ const allAccountantSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers(builder) {
-        builder.addCase(getAllAccountant.fulfilled, (state, action) => {
-            state.results = action.payload.results;
+        builder.addCase(getAllAccountant.fulfilled, (state, action) => {            
+            state.results = action.payload;
             state.count = action.payload.count;
         })
     },

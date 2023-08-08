@@ -7,10 +7,10 @@ function PersonalLawyer({ user }: { user: ILawyer }) {
         <div className="text-start">
             <div>
                 <b>Կամակերպության անուն:</b>
-                <span> {user?.organization_name}</span></div>
+                <span> {user?.company_name}</span></div>
             <div className="mt-2">
                 <b>ՀՎՀՀ:</b>
-                <span> {user?.hvhh}</span>
+                <span> {user?.tin}</span>
             </div>
             <div className="mt-2">
                 <b>Էլ․հասցե:</b>
