@@ -1,3 +1,4 @@
+import { IUser } from "../../client/models/user.model";
 
 export interface ILawyer {
     id?: number;
@@ -5,5 +6,6 @@ export interface ILawyer {
     email: string;
     company_name: string;
     tin: string;
-    password?: string
+    password?: string;
+    user?:IUser;
 }

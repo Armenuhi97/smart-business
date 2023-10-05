@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../models/user.model";
+import { IUser, UserDetail } from "../models/user.model";
 import { ServerResponse } from "../../../models/serve-response.model";
 import API, { pageCount } from "../../../services/API";
 import { IParams } from "../../../models/params.model";
@@ -7,7 +7,7 @@ import { getRoleRequest } from "../../../utils/request/request";
 import { Roles } from "../../../utils/roles";
 import moment from "moment";
 
-const initialState: ServerResponse<IUser[]> = {
+const initialState: ServerResponse<UserDetail[]> = {
     results: [],
     count: 0,
 }

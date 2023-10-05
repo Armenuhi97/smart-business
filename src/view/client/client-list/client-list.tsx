@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Title from "../../../components/title/title";
 import { Table } from "react-bootstrap";
 import Paginate from "../../../components/pagination/pagination";
-import { IUser } from "../models/user.model";
+import { IUser, UserDetail } from "../models/user.model";
 import * as AiIcons from "react-icons/ai";
 import UserListProps from "./hooks/client-list.hook";
 import ListHook from "../../../utils/hooks/list.hook";
@@ -24,7 +24,7 @@ function ClientList({ paramsId }: { paramsId: string | undefined }) {
         handleCloseDeleteModal,
         handleDeleteItem,
         deleteModalShow
-    } = ListHook<IUser>();
+    } = ListHook<UserDetail>();
     const {
         users,
         count,
@@ -53,15 +53,15 @@ function ClientList({ paramsId }: { paramsId: string | undefined }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user: IUser, ind: number) => {
+                    {users.map((user: UserDetail, ind: number) => {
                         return (
                             <tr key={user.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
-                                <td>{user.first_name} {user.last_name}</td>
+                                <td>{user.user.first_name} {user.user.last_name}</td>
                                 <td>{user.phone_number}</td>
-                                <td>{user.email}</td>
+                                <td>{user.user.email}</td>
                                 <td>{user?.birth_date as string}</td>
-                                <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
+                                <td><span onClick={() => { goToUserPage(user.user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
                                 <td><span onClick={() => { goToViewPage(user.id!) }} className='action-btn'><AiIcons.AiOutlineEye /> </span></td>
 

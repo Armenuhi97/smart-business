@@ -1,3 +1,5 @@
+import { IUser } from "../../client/models/user.model";
+
 export interface IAccountant {
     id?: number;
     phone_number: string;
@@ -5,5 +7,6 @@ export interface IAccountant {
     company_name: string;
     tin: string;
     user_count?: number;
-    password?: string
+    password?: string;
+    user?:IUser;
 }

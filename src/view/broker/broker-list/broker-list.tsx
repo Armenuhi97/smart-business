@@ -65,7 +65,7 @@ function BrokerList() {
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
                                 <td>{user.company_name}</td>
                                 <td>{user.tin}</td>
-                                <td>{user.email}</td>
+                                <td>{user.user?.email}</td>
                                 <td>{user.phone_number}</td>
                                 <td><span onClick={() => { openModalForEditItem(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
@@ -79,7 +79,7 @@ function BrokerList() {
             }
             {!!brokers?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count! / pageCount)} />}
             {<DeleteConfirmModal
-                text='Դուք ցանկանու՞մ եք ջնջել այս բրոքերին'
+                text='Դուք ցանկանու՞մ եք ջնջել այս գործակալին'
                 show={deleteModalShow}
                 handleClose={handleCloseDeleteModal}
                 onSave={() => handleDeleteItem(brokers!, handleGetBrokerList, handlePageClick, deleteBroker)}

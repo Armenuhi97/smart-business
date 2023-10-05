@@ -1,7 +1,7 @@
 import API, { pageCount } from "../../services/API";
 
 export async function getRoleRequest(data: any, roleId: number) {
-    return await API.get(`get-users-with-role/?role_id=${roleId}`,
+    return await API.get(`user-detail/?role=${roleId}`,
         {
             params: {
                 // skip: data.isAll ? 0 : (data!.page! - 1) * 10,

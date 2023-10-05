@@ -30,7 +30,7 @@ function ViewAccountant() {
                 <Tab eventKey="client" title="Հաճախորդներ">
                     <ClientList paramsId={paramsId} />
                 </Tab>
-                <Tab eventKey="broker" title="Բրոքեր">
+                <Tab eventKey="broker" title="Գործակալ">
                     <BrokerList />
                 </Tab>
                 {/*  */}

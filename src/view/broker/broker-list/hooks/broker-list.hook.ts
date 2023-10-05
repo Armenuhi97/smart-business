@@ -7,7 +7,7 @@ export function BrokerListProps(query: URLSearchParams, setSearch: any, setPage:
     const brokers: IBroker[] = useAppSelector((state) => state.allBrokers.results);
     const count: number = useAppSelector((state) => state.allBrokers.count);
 
-    const title = 'Բրոքեր';
+    const title = 'Գործակալ';
     useEffect(() => {
         document.title = title;
     });

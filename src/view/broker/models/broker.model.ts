@@ -1,3 +1,4 @@
+import { IUser } from "../../client/models/user.model";
 
 export interface IBroker {
     id?: number;
@@ -5,5 +6,6 @@ export interface IBroker {
     email: string;
     company_name: string;
     tin: string;
-    password?: string
+    password?: string;
+    user?:IUser;
 }
