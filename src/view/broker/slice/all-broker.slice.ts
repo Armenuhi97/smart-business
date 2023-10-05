@@ -25,7 +25,7 @@ const allBrokerSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(getAllBroker.fulfilled, (state, action) => {
-            state.results = action.payload;
+            state.results = action.payload.results;
             state.count = action.payload.count;
         })
     },

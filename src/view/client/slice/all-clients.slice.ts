@@ -26,7 +26,7 @@ const allUsersSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(getAllUsers.fulfilled, (state, action) => {
-            state.results = action.payload.map((el:IUser)=>{
+            state.results = action.payload.results.map((el:IUser)=>{
                 return {
                     ...el,
                     birth_date: moment(el.birth_date).format('YYYY-MM-DD')

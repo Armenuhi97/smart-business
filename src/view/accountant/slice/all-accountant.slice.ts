@@ -25,7 +25,7 @@ const allAccountantSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(getAllAccountant.fulfilled, (state, action) => {            
-            state.results = action.payload;
+            state.results = action.payload.results;
             state.count = action.payload.count;
         })
     },
