@@ -14,7 +14,7 @@ export function ListHook<T>() {
     const [editItem, setEditItem] = useState<T | null>(null);
     const [search, setSearch] = useState<string>('');
 
-    
+
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -31,7 +31,7 @@ export function ListHook<T>() {
         }
         setModalShow(false);
     }, [page]);
-// [page, search]
+    // [page, search]
     const handleClose = useCallback(() => {
         setEditItem(null);
         setModalShow(false);

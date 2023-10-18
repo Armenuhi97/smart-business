@@ -43,7 +43,13 @@ export const AdminData = [
     title: 'Կարգավորումներ',
     path: ``,
     icon: <IoIcons.IoIosSettings />,
-    cName: "nav-text"
+    cName: "nav-text",
+    subNav: [
+      {
+        title: "Բանկ",
+        path: `${mainRoute}/bank`,
+      },
+    ]
   },
   {
     title: "Ելք",

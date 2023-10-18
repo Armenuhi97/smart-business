@@ -12,7 +12,11 @@
       color: red !important;
     }
   }
-  
+  .bank-icon{
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+  }
   .message {
     display: -webkit-box;
     -webkit-line-clamp: 1;
