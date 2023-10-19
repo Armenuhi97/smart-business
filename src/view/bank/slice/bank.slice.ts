@@ -14,16 +14,14 @@ export const getBank = createAsyncThunk(
     'get/bank',
     async (data: IParams) => {
         const response = await API.get(`bank/`,
-            {
-                params: {
-                    // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
-                    // take: data.isAll ? 100 : pageCount,
-                    limit: pageCount,
-                    offset: (data.page - 1) * 100
-                    // query: data.query,
-                    // role: data.roleId
-                }
-            })
+            // {
+            //     params: {             
+            //         // limit: pageCount,
+            //         // offset: (data.page - 1) * 100
+
+            //     }           
+            // }
+            )
         return response.data
     }
 )
@@ -75,8 +73,8 @@ const allBanksSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(getBank.fulfilled, (state, action) => {
-            state.results = action.payload.results;
-            state.count = action.payload.count;
+            state.results = action.payload;
+            // state.count = action.payload.length;
         })
     },
 });

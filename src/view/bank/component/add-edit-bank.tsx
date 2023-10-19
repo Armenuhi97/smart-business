@@ -46,12 +46,14 @@ export default memo(function AddEditBank({ editItem, show, onHide, onSave }: any
                             <Form.Control
                                 isInvalid={!!errors?.icon} id="image"
                                 onChange={e => onFileChange(e)} type="file" size="lg" />
-                            <div>  <Button className='file-item' variant="primary">
+                            <div className='d-flex align-items-center'>  <Button className='file-item' variant="primary">
                                 <label htmlFor="image">
                                     <AiIcons.AiOutlineUpload />
                                 </label>
-                            </Button></div>
-                            {form.showIcon && <img className='bank-icon mt-2' src={form.showIcon} alt="" />}
+                            </Button>
+                            {form.showIcon && <img className='bank-icon mx-2' src={form.showIcon} alt="" />}
+                            </div>
+                           
                             <Form.Control.Feedback type='invalid'>
                                 {errors.icon}
                             </Form.Control.Feedback>

@@ -28,7 +28,7 @@ export function BankProps(query: URLSearchParams, setSearch: any, setPage: any, 
         }
         dispatch(getBank(paramsObject)).then((data: any) => {
             setBank(data.payload);
-            setCount(data.payload.length);
+            // setCount(data.payload.length);
         });
 
     }, [query, search]);
