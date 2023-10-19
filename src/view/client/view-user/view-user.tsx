@@ -5,17 +5,23 @@ import PersonalUser from "./components/personal";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import EmployeeList from "./components/employee/employee";
-import { IUser } from "../models/user.model";
+import { IUser, UserDetail } from "../models/user.model";
 import OrganizationList from "../../organization/component/organization-list/organization-list";
+import ListHook from "../../../utils/hooks/list.hook";
 
 function ViewUser() {
     const {
+        dispatch,
+        params
+    } = ListHook<UserDetail>();
+    const {
         user
-    } = PersonalUserHook<IUser>();
+    } = PersonalUserHook<UserDetail>(params, dispatch);
+
     return (
         <div>
-            <h5>{user?.first_name} {user.last_name}</h5>
-            <Tabs
+            <h5>{user?.user?.first_name} {user?.user?.last_name}</h5>
+            {!!user && <Tabs
                 defaultActiveKey="organization"
                 id="uncontrolled-tab-example"
                 className="mb-3"
@@ -25,12 +31,12 @@ function ViewUser() {
                     <OrganizationList />
                 </Tab>
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList />
+                    <EmployeeList userId={user?.id} />
                 </Tab>
                 <Tab eventKey="personal" title="Անձնական տվյալներ">
                     <PersonalUser user={user} />
                 </Tab>
-            </Tabs>
+            </Tabs>}
         </div>
 
 

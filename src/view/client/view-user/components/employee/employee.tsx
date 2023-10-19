@@ -9,8 +9,9 @@ import Title from "../../../../../components/title/title";
 import * as AiIcons from "react-icons/ai";
 import EmployeeProps from "./hooks/employee.hook";
 import AddEditEmployee from "./component/add-edit-employee";
+import { deleteEmployee } from "./slice/employee.slice";
 
-function EmployeeList() {
+function EmployeeList({ userId }: { userId: number | undefined}) {
     const {
         page,
         setPage,
@@ -34,13 +35,12 @@ function EmployeeList() {
         employees,
         count,
         handleGetEmployeeList,
-        handlePageClick,
-        deleteEmployee
+        handlePageClick        
     } = EmployeeProps(query, setSearch, setPage, search, dispatch, navigate,params);
 
     return (
         <div>
-            <Title title='Աշխատակիցներ' isShowAdd={true} setModalShow={setModalShow} />
+            <Title title='Աշխատակիցներ' isShowAdd={false} setModalShow={setModalShow} />
 
             {!!employees?.length && <Table className='mt-2' striped bordered hover>
                 <thead>

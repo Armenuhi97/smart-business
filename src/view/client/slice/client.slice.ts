@@ -54,6 +54,31 @@ export const modifyUser = createAsyncThunk(
         return response.data;
     }
 )
+
+export const getClientCompany = createAsyncThunk(
+    'get/client/company',
+    async (clientId: number) => {
+        const response = await API.get(`company/`, { params: { client_id: clientId } });
+        return response.data;
+    }
+)
+
+export const getClientWorkers = createAsyncThunk(
+    'get/client/workers',
+    async (clientId: number) => {
+        const response = await API.get(`get-my-workers/`, { params: { client_id: clientId } });
+        return response.data;
+    }
+)
+
+export const getUserDetails = createAsyncThunk(
+    'get/client/detail',
+    async (clientId: number) => {
+        const response = await API.get(`user-detail/${clientId}/`);
+        return response.data;
+    }
+)
+
 const userByIdSlice = createSlice({
     name: 'user-by-id',
     initialState,

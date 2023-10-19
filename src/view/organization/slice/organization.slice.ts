@@ -9,15 +9,20 @@ const initialState: ServerResponse<IOrganization[]> = {
     results: [],
     count: 0,
 }
-
+export interface IUserCompanyParams extends IParams {
+    clientId: number | undefined;
+}
 export const getUserOrganizations = createAsyncThunk(
     'get/organization/organization',
-    async (data: IParams) => {
-        const response = await API.get(`organization/organization/${data.id}/`,
+    async (data: IUserCompanyParams) => {
+        console.log(data);
+        
+        const response = await API.get(`company/`,
             {
                 params: {
                     // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
                     // take: data.isAll ? 100 : pageCount,
+                    client_id: data.clientId?.toString(),
                     limit: pageCount,
                     offset: (data.page - 1) * 100
                     // query: data.query,
@@ -44,9 +49,9 @@ export const addOrganization = createAsyncThunk(
         //         position: toast.POSITION.TOP_RIGHT
         //     });
         // } else {
-            if ((response.status === 200 || response.status === 201) && !!data.createSuccessfully) {
-                data.createSuccessfully();
-            }
+        if ((response.status === 200 || response.status === 201) && !!data.createSuccessfully) {
+            data.createSuccessfully();
+        }
         // }
         return response.data;
     }

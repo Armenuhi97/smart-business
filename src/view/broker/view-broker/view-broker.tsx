@@ -8,12 +8,17 @@ import ClientList from "../../client/client-list/client-list";
 import { IBroker } from "../models/broker.model";
 import PersonalBroker from "./personal-broker";
 import AccountantList from "../../accountant/client-list/accountant-list";
+import ListHook from "../../../utils/hooks/list.hook";
 
 function ViewBroker() {
     const {
+        dispatch,
+        params
+    } = ListHook<IBroker>();
+    const {
         user,
         paramsId
-    } = PersonalUserHook<IBroker>();
+    } = PersonalUserHook<IBroker>(params,dispatch);
     return (
         <div>
             <h5>{user?.company_name}</h5>
@@ -25,7 +30,7 @@ function ViewBroker() {
             >
 
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList />
+                    <EmployeeList  userId={user?.id}/>
                 </Tab>
                 <Tab eventKey="client" title="Հաճախորդներ">
                     <ClientList paramsId={paramsId} />

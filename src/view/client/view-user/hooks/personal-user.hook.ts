@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { getUserDetails } from "../../slice/client.slice";
 
-function PersonalUserHook<B>() {
-
-    const params = useParams();
-    // const user = useAppSelector((state) => state.userById.user);
-    const navigate = useNavigate();
+function PersonalUserHook<B>(params: any, dispatch: any) {
     const [user, setUser] = useState({} as B);
     useEffect(() => {
         if (!!params?.id) {
-            // dispatch(getUserById(+params!.id!)).then((data: any) => {
-            //     setUser(data.payload.user);
-            // });
+            dispatch(getUserDetails(+params!.id!)).then((data: any) => {
+                setUser(data.payload);
+            });
         }
     }, [params.id]);
     return {

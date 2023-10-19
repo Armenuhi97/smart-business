@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { IOrganization } from "../model/organozation.model";
 import { useParams } from "react-router-dom";
-import { getUserOrganizations } from "../slice/organization.slice";
+import { IUserCompanyParams, getUserOrganizations } from "../slice/organization.slice";
 import { IParams } from "../../../models/params.model";
+import { getClientCompany } from "../../client/slice/client.slice";
 
 export function OrganizationProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any) {
     const [organizations, setOrganization] = useState<IOrganization[]>([]);
@@ -20,27 +21,20 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
         handleGetOrganizationList(currentPage, true, currentSearch);
     }, [query]);
 
-    const goToOrganizationPage = (user?: IOrganization | boolean) => {
-        // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
-    }
 
 
-    const handleGetOrganizationList = useCallback((currentPage: number, isSetSearch?: boolean,
-        searchValue: string = '') => {
-
-        const paramsObject: IParams = {
+    const handleGetOrganizationList = useCallback((currentPage: number, isSetSearch?: boolean, searchValue: string = '') => {
+        const paramsObject: IUserCompanyParams = {
             page: currentPage,
-            id: +params!.id!
+            clientId: params.id!
         }
-        // dispatch(getUserOrganizations(paramsObject)).then((data: any) => {
-            // setOrganization(data.payload.results);
-            // setCount(data.payload.count);
-        // });
+        // const request = userId ? getClientCompany(userId) : getUserOrganizations(paramsObject);
+        dispatch(getUserOrganizations(paramsObject)).then((data: any) => {
+            setOrganization(data.payload.results);
+            setCount(data.payload.count);
+        });
 
-    }, [query, search]);
-    const deleteOrganization = () => {
-
-    }
+    }, [query, search, params]);
 
     const handlePageClick = useCallback((e: {
         selected: number, isSetSearch?: boolean, searchValue?: string, isSetCategory?: boolean
@@ -55,9 +49,7 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
         organizations,
         count,
         handleGetOrganizationList,
-        handlePageClick,
-        goToOrganizationPage,
-        deleteOrganization
+        handlePageClick
     }
 }
 

@@ -6,12 +6,17 @@ import ClientList from "../../client/client-list/client-list";
 import AccountantList from "../../accountant/client-list/accountant-list";
 import { ILawyer } from "../models/lawyer.model";
 import PersonalLawyer from "./personal-lawyer";
+import ListHook from "../../../utils/hooks/list.hook";
 
 function ViewLawyer() {
     const {
+        dispatch,
+        params
+    } = ListHook<ILawyer>();
+    const {
         user,
         paramsId
-    } = PersonalUserHook<ILawyer>();
+    } = PersonalUserHook<ILawyer>(params,dispatch);
     return (
         <div>
             <h5>{user?.company_name}</h5>

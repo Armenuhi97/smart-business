@@ -2,7 +2,7 @@
 
 .navbar {
   background-color: $dark-color;
-  height: 80px;
+  height: 45px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -13,7 +13,7 @@
 }
 .menu-bars {
   margin-left: 2rem;
-  font-size: 2rem;
+  font-size: 1.2rem;
   background: none;
   svg {
     cursor: pointer;

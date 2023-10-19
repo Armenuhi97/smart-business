@@ -9,6 +9,7 @@ import Paginate from "../../../../components/pagination/pagination";
 import DeleteConfirmComponent from "../../../../components/delete-confim/delete-confirm.component";
 import AddEditOrganization from "../add-edit-organization";
 import ListHook from "../../../../utils/hooks/list.hook";
+import { deleteOrganization } from "../../slice/organization.slice";
 
 
 function OrganizationList() {
@@ -36,13 +37,11 @@ function OrganizationList() {
         count,
         handleGetOrganizationList,
         handlePageClick,
-        goToOrganizationPage,
-        deleteOrganization
     } = OrganizationProps(query, setSearch, setPage, search, dispatch, navigate, params);
 
     return (
         <div>
-            <Title title='Կազմակերպություններ' isShowAdd={true} setModalShow={setModalShow} />
+            <Title title='Կազմակերպություններ' isShowAdd={false} setModalShow={setModalShow} />
 
             {!!organizations?.length && <Table className='mt-2' striped bordered hover>
                 <thead>
@@ -62,7 +61,7 @@ function OrganizationList() {
                             <tr key={organization.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
                                 <td>{organization.name}</td>
-                                <td>{organization.tin}</td>
+                                <td>{organization.hvhh}</td>
                                 <td><div onClick={() => { openModalForEditItem(organization) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(organization.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
 
