@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ServerResponse } from "../../../../../../models/serve-response.model";
-import { IParams } from "../../../../../../models/params.model";
+import { IParams, WithClientId } from "../../../../../../models/params.model";
 import API, { pageCount } from "../../../../../../services/API";
 import { IAdd, IDelete, IModify } from "../../../../../../models/action.model";
 import { IEmployee } from "../model/employee.model";
@@ -12,12 +12,13 @@ const initialState: ServerResponse<IEmployee[]> = {
 
 export const getUserEmployees = createAsyncThunk(
     'get/employee',
-    async (data: IParams) => {
-        const response = await API.get(`employee/${data.id}/`,
+    async (data: WithClientId) => {
+        const response = await API.get(`get-my-workers/`,
             {
                 params: {
                     // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
                     // take: data.isAll ? 100 : pageCount,
+                    client_id: data.clientId,
                     limit: pageCount,
                     offset: (data.page - 1) * 100
                     // query: data.query,
@@ -44,9 +45,9 @@ export const addEmployee = createAsyncThunk(
         //         position: toast.POSITION.TOP_RIGHT
         //     });
         // } else {
-            if ((response.status === 200 || response.status === 201) && !!data.createSuccessfully) {
-                data.createSuccessfully();
-            }
+        if ((response.status === 200 || response.status === 201) && !!data.createSuccessfully) {
+            data.createSuccessfully();
+        }
         // }
         return response.data;
     }

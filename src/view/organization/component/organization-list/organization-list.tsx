@@ -12,7 +12,7 @@ import ListHook from "../../../../utils/hooks/list.hook";
 import { deleteOrganization } from "../../slice/organization.slice";
 
 
-function OrganizationList() {
+function OrganizationList({ isUser = false }: { isUser: boolean }) {
     const {
         page,
         setPage,
@@ -37,7 +37,7 @@ function OrganizationList() {
         count,
         handleGetOrganizationList,
         handlePageClick,
-    } = OrganizationProps(query, setSearch, setPage, search, dispatch, navigate, params);
+    } = OrganizationProps(query, setSearch, setPage, search, dispatch, navigate, params,isUser);
 
     return (
         <div>

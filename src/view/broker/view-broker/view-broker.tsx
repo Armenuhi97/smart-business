@@ -30,7 +30,7 @@ function ViewBroker() {
             >
 
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList  userId={user?.id}/>
+                    <EmployeeList  isUser={true}/>
                 </Tab>
                 <Tab eventKey="client" title="Հաճախորդներ">
                     <ClientList paramsId={paramsId} />

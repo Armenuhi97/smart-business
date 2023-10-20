@@ -49,11 +49,11 @@ function Login() {
     }
     return (
         <div>
-            <div className='mt-2 d-flex align-items-center justify-content-center'>
-                <img src="/images/icons/logo.svg" alt="" />
-                <span className="ml-2 title">Accounting</span>
-            </div>
+
             <Form style={{ width: '400px' }} className='form-item' onSubmit={handleSubmit}>
+                <div className='logo-container d-flex align-items-center justify-content-center'>
+                    <img className="logo" src="/images/icons/logo.svg" alt="" />
+                </div>
                 <Form.Group>
                     <Form.Label>Էլ․ հասցե</Form.Label>
                     <Form.Control

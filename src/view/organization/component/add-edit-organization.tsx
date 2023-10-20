@@ -14,7 +14,7 @@ export default memo(function AddEditOrganization({ editItem, show, onHide, onSav
         dispatch,
         setField,
         handleClose
-    } = PopupHook<IOrganization>({ name: '', tin: '' }, onHide);
+    } = PopupHook<IOrganization>({ name: '', hvhh: '' }, onHide);
 
     const {
         handleSubmit,

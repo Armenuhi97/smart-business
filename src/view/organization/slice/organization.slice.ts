@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IOrganization } from "../model/organozation.model";
 import { ServerResponse } from "../../../models/serve-response.model";
-import { IParams } from "../../../models/params.model";
+import { IParams, WithClientId } from "../../../models/params.model";
 import API, { pageCount } from "../../../services/API";
 import { IAdd, IDelete, IModify } from "../../../models/action.model";
 
@@ -9,12 +9,10 @@ const initialState: ServerResponse<IOrganization[]> = {
     results: [],
     count: 0,
 }
-export interface IUserCompanyParams extends IParams {
-    clientId: number | undefined;
-}
+
 export const getUserOrganizations = createAsyncThunk(
     'get/organization/organization',
-    async (data: IUserCompanyParams) => {
+    async (data: WithClientId) => {
         console.log(data);
         
         const response = await API.get(`company/`,

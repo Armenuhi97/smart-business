@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { IOrganization } from "../model/organozation.model";
 import { useParams } from "react-router-dom";
-import { IUserCompanyParams, getUserOrganizations } from "../slice/organization.slice";
-import { IParams } from "../../../models/params.model";
+import { getUserOrganizations } from "../slice/organization.slice";
+import { IParams, WithClientId } from "../../../models/params.model";
 import { getClientCompany } from "../../client/slice/client.slice";
 
-export function OrganizationProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any) {
+export function OrganizationProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any, isUser: boolean = true) {
     const [organizations, setOrganization] = useState<IOrganization[]>([]);
     const [count, setCount] = useState<number>(0);
 
@@ -24,9 +24,9 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
 
 
     const handleGetOrganizationList = useCallback((currentPage: number, isSetSearch?: boolean, searchValue: string = '') => {
-        const paramsObject: IUserCompanyParams = {
+        const paramsObject: WithClientId = {
             page: currentPage,
-            clientId: params.id!
+            clientId: isUser ? params.id! : null
         }
         // const request = userId ? getClientCompany(userId) : getUserOrganizations(paramsObject);
         dispatch(getUserOrganizations(paramsObject)).then((data: any) => {

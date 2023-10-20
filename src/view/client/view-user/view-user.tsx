@@ -28,10 +28,10 @@ function ViewUser() {
             // onSelect={(k) => changeTab(k)}
             >
                 <Tab eventKey="organization" title="Կազմակերպություններ">
-                    <OrganizationList />
+                    <OrganizationList isUser={true}/>
                 </Tab>
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList userId={user?.id} />
+                    <EmployeeList   isUser={true} />
                 </Tab>
                 <Tab eventKey="personal" title="Անձնական տվյալներ">
                     <PersonalUser user={user} />

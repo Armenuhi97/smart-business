@@ -30,7 +30,7 @@ function ViewAccountant() {
             >
 
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList  userId={user?.id}/>
+                    <EmployeeList  isUser={false}/>
                 </Tab>
                 <Tab eventKey="client" title="Հաճախորդներ">
                     <ClientList paramsId={paramsId} />

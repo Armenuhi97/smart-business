@@ -11,7 +11,7 @@ import EmployeeProps from "./hooks/employee.hook";
 import AddEditEmployee from "./component/add-edit-employee";
 import { deleteEmployee } from "./slice/employee.slice";
 
-function EmployeeList({ userId }: { userId: number | undefined}) {
+function EmployeeList({ isUser = false }: { isUser: boolean }) {
     const {
         page,
         setPage,
@@ -35,8 +35,8 @@ function EmployeeList({ userId }: { userId: number | undefined}) {
         employees,
         count,
         handleGetEmployeeList,
-        handlePageClick        
-    } = EmployeeProps(query, setSearch, setPage, search, dispatch, navigate,params);
+        handlePageClick
+    } = EmployeeProps(query, setSearch, setPage, search, dispatch, navigate, params,isUser);
 
     return (
         <div>
