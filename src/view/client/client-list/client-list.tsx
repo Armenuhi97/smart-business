@@ -61,7 +61,7 @@ function ClientList({ paramsId }: { paramsId: string | undefined }) {
                                 <td>{user.phone_number}</td>
                                 <td>{user.user.email}</td>
                                 <td>{user?.birth_date as string}</td>
-                                <td><span onClick={() => { goToUserPage(user.user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
+                                <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
                                 <td><span onClick={() => { goToViewPage(user.id!) }} className='action-btn'><AiIcons.AiOutlineEye /> </span></td>
 

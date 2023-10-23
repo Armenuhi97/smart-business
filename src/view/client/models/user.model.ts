@@ -3,13 +3,16 @@ export interface UserDetail {
     birth_date:string;
     company_name:string;
     cover_image:string;
-    employer:any;
+    employer:number;
     id:number;
     language:string;
     legal_type:number;
     phone_number:string;
     tin:string;
     user: IUser;
+    is_deleted:boolean;
+    task_types: any[];
+    accountant: any;
 }
 export interface IUser{
         date_joined?: string;
@@ -20,7 +23,7 @@ export interface IUser{
         username?: string;
 
         phone_number?:string;
-        birth_date?:string;
+        birth_date?:string | Date;
         id?:number;
         password?:string;
 }

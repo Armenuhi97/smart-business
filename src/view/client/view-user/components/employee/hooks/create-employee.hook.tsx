@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { IEmployee } from "../model/employee.model";
+import { IEmployeeObjectType } from "../model/employee.model";
 import { ErrorMessage } from "../../../../../../utils/error";
 import { IAdd, IModify } from "../../../../../../models/action.model";
 import { addEmployee, modifyEmployee } from "../slice/employee.slice";
 
-function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
+function EmployeePopupProps(editItem: IEmployeeObjectType | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
     useEffect(() => {
         if (!!editItem) {
             const companyObj: any = {
@@ -23,7 +23,7 @@ function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any,
 
     const findFormErrors = () => {
         const { name, surname, email, phoneNumber, password } = form;
-        const newErrors = {} as IEmployee;
+        const newErrors = {} as IEmployeeObjectType;
         if (!name || name.trim() === '') newErrors.name = ErrorMessage.required;
         if (!surname || surname.trim() === '') newErrors.surname = ErrorMessage.required;
         if (!email || email.trim() === '') newErrors.email = ErrorMessage.required;
@@ -47,7 +47,7 @@ function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any,
             if (!!editItem) {
 
                 const editObject = editItem;
-                const sendingObject: IModify<IEmployee> = {
+                const sendingObject: IModify<IEmployeeObjectType> = {
                     sendObject: {
                         ...formObject,
                     },
@@ -58,7 +58,7 @@ function EmployeePopupProps(editItem: IEmployee | null, setForm: any, form: any,
                     sendingObject
                 ));
             } else {
-                const sendingObject: IAdd<IEmployee> = {
+                const sendingObject: IAdd<IEmployeeObjectType> = {
                     sendData: formObject,
                     createSuccessfully: handelOnSave
                 }

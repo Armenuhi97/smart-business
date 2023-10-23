@@ -1,34 +1,34 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { IUser } from "../../models/user.model";
+import { IUser, UserDetail } from "../../models/user.model";
 import { ErrorMessage } from "../../../../utils/error";
 import { IAdd, IModify } from "../../../../models/action.model";
+import { getUserDetails } from "../../slice/client.slice";
 
 function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: any, onSave?: (evt: { isEdit: boolean }) => void) {
     const params = useParams();
     // const user = useAppSelector((state) => state.userById.user);
     const navigate = useNavigate();
-    const [user, setUser] = useState({} as IUser);
+    const [user, setUser] = useState({} as UserDetail);
 
 
     useEffect(() => {
         if (!!params?.id) {
-            // dispatch(getUserById(+params!.id!)).then((data: any) => {
-            //     setUser(data.payload.user);
-            // });
+            dispatch(getUserDetails(+params!.id!)).then((data: any) => {                
+                setUser(data.payload);
+            });
         }
     }, [params.id]);
 
     useEffect(() => {
-        if (!!user && params.id) {
+        if (!!user?.id && params.id) {            
             const obj: IUser = {
-                first_name: user.first_name,
-                last_name: user.last_name,
-                email: user.email,
+                first_name: user.user.first_name,
+                last_name: user.user.last_name,
+                email: user.user.email,
                 phone_number: user.phone_number,
-                birth_date: user.birth_date
+                birth_date: new Date(user.birth_date)
             }
-
             setForm({
                 ...form,
                 ...obj

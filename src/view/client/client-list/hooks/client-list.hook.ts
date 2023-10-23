@@ -24,7 +24,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         handleGetUserList(currentPage, true, currentSearch);
     }, [query]);
 
-    const goToUserPage = (user?: IUser | boolean) => {
+    const goToUserPage = (user?: UserDetail | boolean) => {
         // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
         navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : 'user/' + user?.id}`);
     }

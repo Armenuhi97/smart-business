@@ -14,7 +14,7 @@ function PersonalLawyer({ user }: { user: ILawyer }) {
             </div>
             <div className="mt-2">
                 <b>Էլ․հասցե:</b>
-                <span> {user?.email}</span>
+                <span> {user?.user?.email}</span>
             </div>
             <div className="mt-2">
                 <b>Հեռախոսահամար:</b>

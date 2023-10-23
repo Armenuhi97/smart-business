@@ -85,7 +85,7 @@ function AddEditClient() {
                         <div className='col'>
                             <Form.Label>Հեռախոսահամար</Form.Label>
                             <Form.Control
-                                type='number'
+                                type='tel'
                                 value={form.phone_number || ''}
                                 onChange={e => setField('phone_number', e.target.value)}
                                 isInvalid={!!errors?.phone_number}

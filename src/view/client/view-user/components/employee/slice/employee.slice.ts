@@ -3,9 +3,9 @@ import { ServerResponse } from "../../../../../../models/serve-response.model";
 import { IParams, WithClientId } from "../../../../../../models/params.model";
 import API, { pageCount } from "../../../../../../services/API";
 import { IAdd, IDelete, IModify } from "../../../../../../models/action.model";
-import { IEmployee } from "../model/employee.model";
+import { IEmployeeObjectType } from "../model/employee.model";
 
-const initialState: ServerResponse<IEmployee[]> = {
+const initialState: ServerResponse<IEmployeeObjectType[]> = {
     results: [],
     count: 0,
 }
@@ -38,7 +38,7 @@ export const getEmployeeById = createAsyncThunk(
 )
 export const addEmployee = createAsyncThunk(
     'add/employee',
-    async (data: IAdd<IEmployee>) => {
+    async (data: IAdd<IEmployeeObjectType>) => {
         const response = await API.post('auth/registration/role', data.sendData);
         // if (response.data === 'This employeename is already Exist') {
         //     toast.error(response.data, {
@@ -64,7 +64,7 @@ export const deleteEmployee = createAsyncThunk(
 )
 export const modifyEmployee = createAsyncThunk(
     'modify/employee',
-    async (data: IModify<IEmployee>) => {
+    async (data: IModify<IEmployeeObjectType>) => {
         const response = await API.put(`employee/edit/${data.id}`, data.sendObject);
         if (response.status === 200 || response.status === 201) {
 

@@ -46,7 +46,7 @@ function EmployeeList({ isUser = false }: { isUser: boolean }) {
                 <thead>
                     <tr>
                         <th>N</th>
-                        <th>ԱՆուն</th>
+                        <th>Անուն</th>
                         <th>Ազգանուն</th>
                         <th>Էլ․ հասցե</th>
                         <th>Հեռ․</th>
@@ -61,10 +61,10 @@ function EmployeeList({ isUser = false }: { isUser: boolean }) {
                         return (
                             <tr key={employee.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
-                                <td>{employee.name}</td>
-                                <td>{employee.surname}</td>
-                                <td>{employee.email}</td>
-                                <td>{employee.phoneNumber}</td>
+                                <td>{employee.user.first_name}</td>
+                                <td>{employee.user.last_name}</td>
+                                <td>{employee.user.email}</td>
+                                <td>{employee.phone_number}</td>
                                 <td><div onClick={() => { openModalForEditItem(employee) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
 
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(employee.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
@@ -78,7 +78,7 @@ function EmployeeList({ isUser = false }: { isUser: boolean }) {
                 </tbody>
             </Table>
             }
-            {!!employees?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count / pageCount)} />}
+            {/* {!!employees?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count / pageCount)} />} */}
             <DeleteConfirmComponent
                 show={deleteModalShow}
                 handleClose={handleCloseDeleteModal}

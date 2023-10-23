@@ -26,7 +26,7 @@ export function LawyerListProps(query: URLSearchParams, setSearch: any, setPage:
 
 
     const goToViewPage = (id: number) => {
-        navigate(`/dashboard/broker/personal/${id}`);
+        navigate(`/dashboard/lawyer/personal/${id}`);
     }
 
     const handleGetLawyerList = useCallback((currentPage: number, isSetSearch?: boolean,

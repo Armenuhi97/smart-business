@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Form } from 'react-bootstrap';
-import { IEmployee } from '../model/employee.model';
+import { IEmployeeObjectType } from '../model/employee.model';
 import PopupHook from '../../../../../../utils/hooks/popup.hook';
 import ModalContent from '../../../../../../components/modal-content/modal-content.component';
 import EmployeePopupProps from '../hooks/create-employee.hook';
@@ -14,7 +14,7 @@ export default memo(function AddEditEmployee({ editItem, show, onHide, onSave }:
         dispatch,
         setField,
         handleClose
-    } = PopupHook<IEmployee>({ name: '', surname: '', email: '', phoneNumber: '', password: '' }, onHide);
+    } = PopupHook<IEmployeeObjectType>({ name: '', surname: '', email: '', phoneNumber: '', password: '' }, onHide);
 
     const {
         handleSubmit,

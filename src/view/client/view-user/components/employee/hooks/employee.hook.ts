@@ -26,11 +26,11 @@ export function EmployeeProps(query: URLSearchParams, setSearch: any, setPage: a
 
         const paramsObject: WithClientId = {
             page: currentPage,
-            clientId: isUser ? params!.id! : ''
+            clientId: params!.id!
         }
         dispatch(getUserEmployees(paramsObject)).then((data: any) => {
-            setEmployees(data.payload.results);
-            setCount(data.payload.count);
+            setEmployees(data.payload);
+            // setCount(data.payload.count);
         });
 
     }, [query, search]);

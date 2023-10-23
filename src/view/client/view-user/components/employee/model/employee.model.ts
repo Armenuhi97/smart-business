@@ -1,4 +1,6 @@
-export interface IEmployee {
+import { UserDetail } from "../../../../models/user.model";
+
+export interface IEmployeeObjectType {
     id?: number;
     name: string;
     surname: string;
@@ -6,3 +8,6 @@ export interface IEmployee {
     phoneNumber: string;
     password?: string;
 }
+
+
+export interface IEmployee extends UserDetail {}
