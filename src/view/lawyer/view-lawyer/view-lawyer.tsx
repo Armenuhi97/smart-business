@@ -16,7 +16,7 @@ function ViewLawyer() {
     const {
         user,
         paramsId
-    } = PersonalUserHook<ILawyer>(params,dispatch);
+    } = PersonalUserHook<ILawyer>(params, dispatch);
     return (
         <div>
             <h5>{user?.company_name}</h5>
@@ -27,7 +27,7 @@ function ViewLawyer() {
             // onSelect={(k) => changeTab(k)}
             >
                 <Tab eventKey="client" title="Հաճախորդներ">
-                    <ClientList paramsId={paramsId} />
+                    <ClientList type={'lawyer_id'} />
                 </Tab>
                 <Tab eventKey="accountant" title="Հաշվապահներ">
                     <AccountantList />

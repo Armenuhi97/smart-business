@@ -14,14 +14,15 @@ export default memo(function AddEditBank({ editItem, show, onHide, onSave }: any
         setErrors,
         dispatch,
         setField,
-        handleClose
+        handleClose,
+        onUploadFile,
+        onFileChange
     } = PopupHook<IBank>({ name: '', icon: '', showIcon: '', file: null }, onHide);
 
     const {
         handleSubmit,
         resetForm,
-        onFileChange
-    } = BankPopupProps(editItem, setForm, form, dispatch, setErrors, onSave)
+    } = BankPopupProps(editItem, setForm, form, dispatch, setErrors, onSave,onUploadFile)
 
 
     return (
@@ -45,7 +46,7 @@ export default memo(function AddEditBank({ editItem, show, onHide, onSave }: any
                             <Form.Label>Նկար</Form.Label>
                             <Form.Control
                                 isInvalid={!!errors?.icon} id="image"
-                                onChange={e => onFileChange(e)} type="file" size="lg" />
+                                onChange={e => onFileChange(e,'showIcon')} type="file" size="lg" />
                             <div className='d-flex align-items-center'>  <Button className='file-item' variant="primary">
                                 <label htmlFor="image">
                                     <AiIcons.AiOutlineUpload />

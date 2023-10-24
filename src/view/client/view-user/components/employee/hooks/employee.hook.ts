@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { IParams, WithClientId } from "../../../../../../models/params.model";
+import { ParamsWithId } from "../../../../../../models/params.model";
 import { IEmployee } from "../model/employee.model";
 import { getUserEmployees } from "../slice/employee.slice";
 
-export function EmployeeProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any, isUser = false) {
+export function EmployeeProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, params: any, type:string) {
     const [employees, setEmployees] = useState<IEmployee[]>([]);
     const [count, setCount] = useState<number>(0);
 
@@ -24,10 +23,11 @@ export function EmployeeProps(query: URLSearchParams, setSearch: any, setPage: a
     const handleGetEmployeeList = useCallback((currentPage: number, isSetSearch?: boolean,
         searchValue: string = '') => {
 
-        const paramsObject: WithClientId = {
+        const paramsObject: ParamsWithId = {
             page: currentPage,
-            clientId: params!.id!
+            [type]: params!.id!
         }
+        
         dispatch(getUserEmployees(paramsObject)).then((data: any) => {
             setEmployees(data.payload);
             // setCount(data.payload.count);

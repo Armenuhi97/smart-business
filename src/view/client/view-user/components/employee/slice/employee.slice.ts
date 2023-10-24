@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ServerResponse } from "../../../../../../models/serve-response.model";
-import { IParams, WithClientId } from "../../../../../../models/params.model";
+import { IParams, ParamsWithId } from "../../../../../../models/params.model";
 import API, { pageCount } from "../../../../../../services/API";
 import { IAdd, IDelete, IModify } from "../../../../../../models/action.model";
 import { IEmployeeObjectType } from "../model/employee.model";
@@ -12,17 +12,13 @@ const initialState: ServerResponse<IEmployeeObjectType[]> = {
 
 export const getUserEmployees = createAsyncThunk(
     'get/employee',
-    async (data: WithClientId) => {
+    async (data: ParamsWithId) => {
         const response = await API.get(`get-my-workers/`,
             {
                 params: {
-                    // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
-                    // take: data.isAll ? 100 : pageCount,
-                    client_id: data.clientId,
+                    ...data,
                     limit: pageCount,
-                    offset: (data.page - 1) * 100
-                    // query: data.query,
-                    // role: data.roleId
+                    offset: (data.page! - 1) * 100
                 }
             })
         return response.data

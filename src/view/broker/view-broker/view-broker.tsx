@@ -30,10 +30,10 @@ function ViewBroker() {
             >
 
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList  isUser={true}/>
+                    <EmployeeList  type={'broker_id'}/>
                 </Tab>
                 <Tab eventKey="client" title="Հաճախորդներ">
-                    <ClientList paramsId={paramsId} />
+                    <ClientList type={'broker_id'} />
                 </Tab>
                 <Tab eventKey="accountant" title="Հաշվապահներ">
                     <AccountantList />

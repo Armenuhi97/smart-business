@@ -10,7 +10,7 @@ import { pageCount } from "../../../services/API";
 import DeleteConfirmModal from '../../../components/delete-confim/delete-confirm.component';
 import { deleteUser } from "../slice/client.slice";
 
-function ClientList({ paramsId }: { paramsId: string | undefined }) {
+function ClientList({ type }: { type: string }) {
     const {
         page,
         setPage,
@@ -33,7 +33,7 @@ function ClientList({ paramsId }: { paramsId: string | undefined }) {
         goToUserPage,
         title,
         goToViewPage
-    } = UserListProps(query, setSearch, setPage, search, dispatch, navigate, params);
+    } = UserListProps(query, setSearch, setPage, search, dispatch, navigate, params, type);
 
     return (
         <div>
@@ -71,12 +71,12 @@ function ClientList({ paramsId }: { paramsId: string | undefined }) {
                 </tbody>
             </Table>
             }
-            {!!users?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count / pageCount)} />}
+            {!!users?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count! / pageCount)} />}
             <DeleteConfirmModal
                 text='Դուք ցանկանու՞մ եք ջնջել այս հաճախորդին'
                 show={deleteModalShow}
                 handleClose={handleCloseDeleteModal}
-                onSave={() => handleDeleteItem(users, handleGetUserList, handlePageClick, deleteUser)}
+                onSave={() => handleDeleteItem(users!, handleGetUserList, handlePageClick, deleteUser)}
             />
         </div>
     )

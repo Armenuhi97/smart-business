@@ -9,7 +9,7 @@ import { imageRegExp } from "../../../utils/image-regexp";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../../slice/upload-file.slice";
 
-function BankPopupProps(editItem: IBank | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
+function BankPopupProps(editItem: IBank | null, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void, onUploadFile: (controlName: string, callback: (url: string) => void) => void) {
     // const params = useParams();
     // // const editItem:ICompany={} as ;
     // const navigate = useNavigate();
@@ -37,47 +37,45 @@ function BankPopupProps(editItem: IBank | null, setForm: any, form: any, dispatc
         if (!showIcon || showIcon.trim() === '') newErrors.icon = ErrorMessage.required;
         return newErrors;
     }
-    const onFileChange = (e: ChangeEvent<any>) => {
-        const files = (e.target as HTMLInputElement).files;
-        if (!!files && files.length > 0) {
-            const file = files[0];
-            const fr = new FileReader();
-            if (!imageRegExp(file)) {
-                toast.error(ErrorMessage.formatError, {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                return;
-            }
-            fr.onload = () => {
-                if (typeof fr.result === 'string') {
-                    setForm({
-                        ...form,
-                        file,
-                        showIcon: fr.result
-                    });
-                }
-            };
-            fr.readAsDataURL(file);
+    // const onFileChange = (e: ChangeEvent<any>) => {
+    //     const files = (e.target as HTMLInputElement).files;
+    //     if (!!files && files.length > 0) {
+    //         const file = files[0];
+    //         const fr = new FileReader();
+    //         if (!imageRegExp(file)) {
+    //             toast.error(ErrorMessage.formatError, {
+    //                 position: toast.POSITION.TOP_RIGHT
+    //             });
+    //             return;
+    //         }
+    //         fr.onload = () => {
+    //             if (typeof fr.result === 'string') {
+    //                 setForm({
+    //                     ...form,
+    //                     file,
+    //                     showIcon: fr.result
+    //                 });
+    //             }
+    //         };
+    //         fr.readAsDataURL(file);
 
-        }
-    }
-    const onUploadFile = () => {
-        console.log(form);
-
-        const formData = new FormData();
-        formData.append('file_url', form.file, form.file?.name);
-        const sendingObject: IAdd<FormData> = {
-            sendData: formData,
-            createSuccessfully: (imageUrl: any) => {
-                setForm({
-                    ...form,
-                    icon: imageUrl
-                });
-                sendCreateRequest(imageUrl);
-            }
-        }
-        dispatch(uploadFile(sendingObject))
-    };
+    //     }
+    // }
+    // const onUploadFile = () => {
+    //     const formData = new FormData();
+    //     formData.append('file_url', form.file, form.file?.name);
+    //     const sendingObject: IAdd<FormData> = {
+    //         sendData: formData,
+    //         createSuccessfully: (imageUrl: any) => {
+    //             setForm({
+    //                 ...form,
+    //                 icon: imageUrl
+    //             });
+    //             sendCreateRequest(imageUrl);
+    //         }
+    //     }
+    //     dispatch(uploadFile(sendingObject))
+    // };
     const handleSubmit = (e?: any): void => {
         if (e) {
             e.preventDefault();
@@ -87,7 +85,7 @@ function BankPopupProps(editItem: IBank | null, setForm: any, form: any, dispatc
             setErrors(newErrors)
         } else {
             if (form.file) {
-                onUploadFile();
+                onUploadFile('icon', sendCreateRequest);
             } else {
                 sendCreateRequest();
             }
@@ -138,8 +136,7 @@ function BankPopupProps(editItem: IBank | null, setForm: any, form: any, dispatc
 
     return {
         handleSubmit,
-        resetForm,
-        onFileChange
+        resetForm        
     }
 }
 export default BankPopupProps;

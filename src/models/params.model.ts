@@ -1,7 +1,8 @@
 export interface IParams {
     page: number;
     id?: number;
+    offset?: number;
 }
-export interface WithClientId extends IParams {
-    clientId: number | undefined;
+export interface ParamsWithId extends IParams {
+    [type: string]: number | undefined | null;
 }

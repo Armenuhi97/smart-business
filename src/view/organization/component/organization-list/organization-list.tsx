@@ -12,7 +12,7 @@ import ListHook from "../../../../utils/hooks/list.hook";
 import { deleteOrganization } from "../../slice/organization.slice";
 
 
-function OrganizationList({ isUser = false }: { isUser: boolean }) {
+function OrganizationList({ type }: { type:string }) {
     const {
         page,
         setPage,
@@ -37,7 +37,7 @@ function OrganizationList({ isUser = false }: { isUser: boolean }) {
         count,
         handleGetOrganizationList,
         handlePageClick,
-    } = OrganizationProps(query, setSearch, setPage, search, dispatch, navigate, params,isUser);
+    } = OrganizationProps(query, setSearch, setPage, search, dispatch, navigate, params, type);
 
     return (
         <div>
@@ -47,12 +47,12 @@ function OrganizationList({ isUser = false }: { isUser: boolean }) {
                 <thead>
                     <tr>
                         <th>N</th>
-                        <th>ԱՆուն</th>
+                        <th>Անուն</th>
                         <th>ՀՎՀՀ</th>
+                        <th>Հասցե</th>
+                        <th>Մենեջեր</th>
                         <th></th>
                         <th></th>
-                        {/* <th></th>
-                        <th></th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -62,12 +62,11 @@ function OrganizationList({ isUser = false }: { isUser: boolean }) {
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
                                 <td>{organization.name}</td>
                                 <td>{organization.hvhh}</td>
+                                <td>{organization.address?.length && organization.address[0].name}</td>
+                                <td>{organization.managers?.length &&
+                                    <span>{organization.managers[0].user.first_name} {organization.managers[0].user.last_name}</span>}</td>
                                 <td><div onClick={() => { openModalForEditItem(organization) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(organization.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
-
-                                {/* <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
-                                <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td> */}
-
                             </tr>
                         )
                     })}

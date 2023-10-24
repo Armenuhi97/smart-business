@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IOrganization } from "../model/organozation.model";
 import { ServerResponse } from "../../../models/serve-response.model";
-import { IParams, WithClientId } from "../../../models/params.model";
+import { IParams, ParamsWithId } from "../../../models/params.model";
 import API, { pageCount } from "../../../services/API";
 import { IAdd, IDelete, IModify } from "../../../models/action.model";
 
@@ -12,24 +12,18 @@ const initialState: ServerResponse<IOrganization[]> = {
 
 export const getUserOrganizations = createAsyncThunk(
     'get/organization/organization',
-    async (data: WithClientId) => {
-        console.log(data);
-        
-        const response = await API.get(`company/`,
-            {
-                params: {
-                    // skip: data.isAll ? 0 : (data!.page! - 1) * 10,
-                    // take: data.isAll ? 100 : pageCount,
-                    client_id: data.clientId?.toString(),
-                    limit: pageCount,
-                    offset: (data.page - 1) * 100
-                    // query: data.query,
-                    // role: data.roleId
-                }
-            })
-        return response.data
+    async (data: ParamsWithId) => {
+        const url= data.acc_id ? `get-companies-for-accountant/` :'company/'
+        let params = {
+            ...data,
+            limit: pageCount,
+            offset: (data.page - 1) * 100,
+        }    
+        const response = await API.get(url, { params })
+        return response.data;
     }
 )
+
 
 export const getOrganizationById = createAsyncThunk(
     'get/organization-by-id/',
@@ -38,6 +32,14 @@ export const getOrganizationById = createAsyncThunk(
         return response.data
     }
 )
+
+// export const getManagers = createAsyncThunk(
+//     'get/all-managers/',
+//     async () => {
+//         const response = await API.get(`get-my-workers/`)
+//         return response.data
+//     }
+// )
 export const addOrganization = createAsyncThunk(
     'add/organization',
     async (data: IAdd<IOrganization>) => {

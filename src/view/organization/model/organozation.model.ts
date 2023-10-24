@@ -10,8 +10,10 @@ export interface IOrganization {
     accountant_worker?: number;
     address?: IAddress[];
     managers?: UserDetail[];
+    showImage?: string;
+    file?: File | null;
 }
 interface IAddress {
-    id: number;
+    id?: number;
     name: string;
 }

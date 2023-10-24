@@ -9,16 +9,18 @@ import PersonalAccountant from "./personal-accountant";
 import ClientList from "../../client/client-list/client-list";
 import BrokerList from "../../broker/broker-list/broker-list";
 import ListHook from "../../../utils/hooks/list.hook";
+import OrganizationList from "../../organization/component/organization-list/organization-list";
+import { UserDetail } from "../../client/models/user.model";
 
 function ViewAccountant() {
     const {
         dispatch,
         params
-    } = ListHook<IAccountant>();
+    } = ListHook<UserDetail>();
     const {
         user,
         paramsId
-    } = PersonalUserHook<IAccountant>(params, dispatch);
+    } = PersonalUserHook<UserDetail>(params, dispatch);
     return (
         <div>
             <h5>{user?.company_name}</h5>
@@ -30,10 +32,13 @@ function ViewAccountant() {
             >
 
                 <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList  isUser={false}/>
+                    <EmployeeList type={'acc_id'} />
+                </Tab>
+                <Tab eventKey="organization" title="Կազմակերպություններ">
+                    <OrganizationList type={'acc_id'} />
                 </Tab>
                 <Tab eventKey="client" title="Հաճախորդներ">
-                    <ClientList paramsId={paramsId} />
+                    <ClientList type={'acc_id'} />
                 </Tab>
                 <Tab eventKey="broker" title="Գործակալ">
                     <BrokerList />

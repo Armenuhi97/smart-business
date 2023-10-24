@@ -1,5 +1,10 @@
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { useAppDispatch } from "../../hooks";
+import { imageRegExp } from "../image-regexp";
+import { toast } from "react-toastify";
+import { ErrorMessage } from "../error";
+import { IAdd } from "../../models/action.model";
+import { uploadFile } from "../../slice/upload-file.slice";
 
 function PopupHook<B>(initialValue: B, onHide?: () => void) {
 
@@ -19,7 +24,7 @@ function PopupHook<B>(initialValue: B, onHide?: () => void) {
             }
         } else {
             formatedSelectedValue = value
-        }        
+        }
         setForm({
             ...form,
             [field]: formatedSelectedValue
@@ -45,6 +50,46 @@ function PopupHook<B>(initialValue: B, onHide?: () => void) {
         resetForm();
         onHide!();
     }
+
+    const onFileChange = (e: ChangeEvent<any>, controlName: string) => {
+        const files = (e.target as HTMLInputElement).files;
+        if (!!files && files.length > 0) {
+            const file = files[0];
+            const fr = new FileReader();
+            if (!imageRegExp(file)) {
+                toast.error(ErrorMessage.formatError, {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                return;
+            }
+            fr.onload = () => {
+                if (typeof fr.result === 'string') {
+                    setForm({
+                        ...form,
+                        file,
+                        [controlName]: fr.result
+                    });
+                }
+            };
+            fr.readAsDataURL(file);
+
+        }
+    }
+    const onUploadFile = (controlName: string, callback: (url: string) => void) => {
+        const formData = new FormData();
+        formData.append('file_url', (form as any).file, (form as any).file?.name);
+        const sendingObject: IAdd<FormData> = {
+            sendData: formData,
+            createSuccessfully: (imageUrl: any) => {
+                setForm({
+                    ...form,
+                    [controlName]: imageUrl
+                });
+                callback(imageUrl);
+            }
+        }
+        dispatch(uploadFile(sendingObject))
+    };
     return {
         form,
         setForm,
@@ -54,7 +99,9 @@ function PopupHook<B>(initialValue: B, onHide?: () => void) {
         setField,
         handleClose,
         setFormArray,
-        deleteItemFormFormArray
+        deleteItemFormFormArray,
+        onUploadFile,
+        onFileChange
     }
 }
 export default PopupHook;

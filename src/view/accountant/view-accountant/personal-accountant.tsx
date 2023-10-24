@@ -1,11 +1,14 @@
 import React from "react";
-import { IAccountant } from "../models/accountant.model";
+import { baseUrl } from "../../../services/API";
+import { UserDetail } from "../../client/models/user.model";
 
-function PersonalAccountant({ user }: { user: IAccountant }) {
+function PersonalAccountant({ user }: { user: UserDetail }) {
 
     return (
         <div className="text-start">
-            <div>
+            {user?.avatar_image && <img height={100} width={100} className="object-fit-contain m-auto" src={baseUrl + user?.avatar_image} alt="" />}
+
+            <div className="mt-2">
                 <b>Կամակերպության անուն:</b>
                 <span> {user?.company_name}</span></div>
             <div className="mt-2">
@@ -14,7 +17,7 @@ function PersonalAccountant({ user }: { user: IAccountant }) {
             </div>
             <div className="mt-2">
                 <b>Էլ․հասցե:</b>
-                <span> {user?.email}</span>
+                <span> {user?.user?.email}</span>
             </div>
             <div className="mt-2">
                 <b>Հեռախոսահամար:</b>
@@ -22,7 +25,7 @@ function PersonalAccountant({ user }: { user: IAccountant }) {
             </div>
             <div className="mt-2">
                 <b>Հաճախորդների քանակ:</b>
-                <span> {user?.user_count}</span>
+                <span> </span>
             </div>
 
         </div>
