@@ -19,8 +19,8 @@ export const getUserById = createAsyncThunk(
 export const addUser = createAsyncThunk(
     'add/user',
     async (data: IAdd<IUser>) => {
-        const response = await API.post('auth/registration/role', data.sendData);
-        if (response.data === 'This username is already Exist') {
+        const response = await API.post('register-worker/', data.sendData);
+        if (response.data === 'Email must be unique.') {
             toast.error(response.data, {
                 position: toast.POSITION.TOP_RIGHT
             });

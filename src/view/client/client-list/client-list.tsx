@@ -46,7 +46,8 @@ function ClientList({ type }: { type: string }) {
                         <th>Անուն Ազգանուն</th>
                         <th>Հեռախոսահամար</th>
                         <th>Էլ․հասցե</th>
-                        <th>Ծննդյան ամսաթիվ</th>
+                        {/* <th>Ծննդյան ամսաթիվ</th> */}
+                        <th>Մենեջերների քանակ</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -60,7 +61,7 @@ function ClientList({ type }: { type: string }) {
                                 <td>{user.user.first_name} {user.user.last_name}</td>
                                 <td>{user.phone_number}</td>
                                 <td>{user.user.email}</td>
-                                <td>{user?.birth_date as string}</td>
+                                <td>{user?.manager_count}</td>
                                 <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
                                 <td><span onClick={() => { goToViewPage(user.id!) }} className='action-btn'><AiIcons.AiOutlineEye /> </span></td>

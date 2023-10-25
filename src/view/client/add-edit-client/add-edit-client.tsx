@@ -18,9 +18,8 @@ function AddEditClient() {
     } = PopupHook<IUser>({
         first_name: '',
         last_name: '',
-        phone_number: '', email: '',
-        birth_date: '',
-        password:''
+        phone_number: '',
+        email: '',
     });
 
     const {
@@ -62,10 +61,19 @@ function AddEditClient() {
                                 {errors?.last_name}
                             </Form.Control.Feedback>
                         </div>
+
+                    </div>
+                    <div className='row mt-2'>
+                        {/* <div className='col'>
+                            <Form.Label>Ծննդյան ամսաթիվ</Form.Label>
+                            <div>
+                                <MyDatePicker wrapperClassName="datePicker" selectValue={form?.birth_date} setField={(e: Date) => setField('birth_date', e)} />
+                            </div>
+                        </div> */}
                         <div className='col'>
                             <Form.Label>Էլ․հասցե</Form.Label>
                             <Form.Control
-                                type='text'
+                                type='email'
                                 value={form.email || ''}
                                 onChange={e => setField('email', e.target.value)}
                                 isInvalid={!!errors?.email}
@@ -73,14 +81,6 @@ function AddEditClient() {
                             <Form.Control.Feedback type='invalid'>
                                 {errors?.email}
                             </Form.Control.Feedback>
-                        </div>
-                    </div>
-                    <div className='row mt-2'>
-                        <div className='col'>
-                            <Form.Label>Ծննդյան ամսաթիվ</Form.Label>
-                            <div>
-                                <MyDatePicker wrapperClassName="datePicker" selectValue={form?.birth_date} setField={(e: Date) => setField('birth_date', e)} />
-                            </div>
                         </div>
                         <div className='col'>
                             <Form.Label>Հեռախոսահամար</Form.Label>
@@ -94,7 +94,7 @@ function AddEditClient() {
                                 {errors?.phone_number}
                             </Form.Control.Feedback>
                         </div>
-                        {!id && <div className='col'>
+                        {/* {!id && <div className='col'>
                             <Form.Label>Գաղտնաբառ</Form.Label>
                             <Form.Control
                                 type='password'
@@ -105,7 +105,7 @@ function AddEditClient() {
                             <Form.Control.Feedback type='invalid'>
                                 {errors?.password}
                             </Form.Control.Feedback>
-                        </div>}
+                        </div>} */}
 
                     </div>
                 </Form.Group>

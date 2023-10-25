@@ -38,7 +38,6 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
 
     const handleGetUserList = useCallback((currentPage: number, isSetSearch?: boolean,
         searchValue: string = '') => {
-
         let reqParams: ParamsWithId = {
             page: currentPage,
             // query: isSetSearch ? searchValue : search,
@@ -52,9 +51,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
             }
             request = getMyClients(reqParams);
         } else {
-            request = getAllUsers({
-                ...params
-            });
+            request = getAllUsers(reqParams);
         }
         dispatch(request).then((data: any) => {
             if (type === 'acc_id') {

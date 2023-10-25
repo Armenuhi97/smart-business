@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IUser, UserDetail } from "../../models/user.model";
 import { ErrorMessage } from "../../../../utils/error";
 import { IAdd, IModify } from "../../../../models/action.model";
-import { getUserDetails } from "../../slice/client.slice";
+import { addUser, getUserDetails } from "../../slice/client.slice";
+import { Roles } from "../../../../utils/roles";
 
 function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: any, onSave?: (evt: { isEdit: boolean }) => void) {
     const params = useParams();
@@ -14,20 +15,19 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
 
     useEffect(() => {
         if (!!params?.id) {
-            dispatch(getUserDetails(+params!.id!)).then((data: any) => {                
+            dispatch(getUserDetails(+params!.id!)).then((data: any) => {
                 setUser(data.payload);
             });
         }
     }, [params.id]);
 
     useEffect(() => {
-        if (!!user?.id && params.id) {            
+        if (!!user?.id && params.id) {
             const obj: IUser = {
                 first_name: user.user.first_name,
                 last_name: user.user.last_name,
                 email: user.user.email,
-                phone_number: user.phone_number,
-                birth_date: new Date(user.birth_date)
+                phone_number: user.phone_number
             }
             setForm({
                 ...form,
@@ -37,15 +37,13 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
     }, [user, params.id])
 
     const findFormErrors = () => {
-        const { first_name, last_name, phone_number, email, password } = form;
+        const { first_name, last_name, phone_number, email } = form;
         const newErrors = {} as IUser;
         if (!first_name || first_name.trim() === '') newErrors.first_name = ErrorMessage.required;
         if (!last_name || last_name.trim() === '') newErrors.last_name = ErrorMessage.required;
         if (!phone_number || phone_number.trim() === '') newErrors.phone_number = ErrorMessage.required;
         if (!email || email.trim() === '') newErrors.email = ErrorMessage.required;
-        if (!params.id) {
-            if (!password || password.trim() === '') newErrors.password = ErrorMessage.required;
-        }
+
 
         return newErrors;
     }
@@ -61,7 +59,14 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
         } else {
             const formObject = {
                 ...form,
-                role: params.roleId
+                role: Roles.client,
+                legal_type: 1,
+                tin: '',
+                company_name: '',
+                birth_date: '2023-10-25T11:11:32.874Z',
+                language: 'am',
+                cover_image: '',
+                avatar_image: ''
             }
             if (!!params.id) {
 
@@ -81,9 +86,9 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
                     sendData: formObject,
                     createSuccessfully: handelOnSave
                 }
-                // dispatch(addUser(
-                //     sendingObject
-                // ))
+                dispatch(addUser(
+                    sendingObject
+                ))
             }
 
 
@@ -93,14 +98,16 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
     const handelOnSave = (): void => {
         resetForm();
         navigate({
-            pathname: `dashboard/users/list`
+            pathname: `/dashboard/users/list`
         });
     }
 
     const resetForm = () => {
         setForm({
-            title: '', description: '', logo: '', logoFile: null,
-            user: []
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone_number: ''
         })
     }
 

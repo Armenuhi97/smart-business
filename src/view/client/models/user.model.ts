@@ -13,6 +13,7 @@ export interface UserDetail {
     is_deleted:boolean;
     task_types: any[];
     accountant: any;
+    manager_count:number;
 }
 export interface IUser{
         date_joined?: string;

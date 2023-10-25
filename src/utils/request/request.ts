@@ -1,6 +1,6 @@
 import API, { pageCount } from "../../services/API";
 
-export async function getRoleRequest(data: any, roleId: number) {
+export async function getRoleRequest(data: any, roleId: number) {    
     return await API.get(`user-detail/?role=${roleId}`,
         {
             params: {
