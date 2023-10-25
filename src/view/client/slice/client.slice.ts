@@ -45,7 +45,7 @@ export const deleteUser = createAsyncThunk(
 export const modifyUser = createAsyncThunk(
     'modify/user',
     async (data: IModify<IUser>) => {
-        const response = await API.put(`user/edit/${data.id}`, data.sendObject);
+        const response = await API.put(`edit-user/${data.id}/`, data.sendObject);
         if (response.status === 200 || response.status === 201) {
 
             if (data.updateSuccessfully)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import EmployeeList from "../../client/view-user/components/employee/employee";
@@ -15,6 +15,8 @@ import { Button } from "react-bootstrap";
 import AddAccountantForClient from '../../client/view-user/components/add-accountant/components/add-accountant';
 
 function ViewAccountant() {
+    const [key, setKey] = useState<string>("staff");
+
     const {
         dispatch,
         params,
@@ -36,29 +38,30 @@ function ViewAccountant() {
 
             {user && <div>
                 <Tabs
-                    defaultActiveKey="staff"
                     id="uncontrolled-tab-example"
                     className="mb-3"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k!)}
                 // onSelect={(k) => changeTab(k)}
                 >
                     <Tab eventKey="staff" title="Աշխատակիցներ">
-                        <EmployeeList type={'acc_id'} />
+                        {key === 'staff' && <EmployeeList type={'acc_id'} />}
                     </Tab>
                     <Tab eventKey="organization" title="Կազմակերպություններ">
-                        <OrganizationList type={'acc_id'} />
+                        {key === 'organization' && <OrganizationList type={'acc_id'} />}
                     </Tab>
                     <Tab eventKey="client" title="Հաճախորդներ">
-                        <ClientList type={'acc_id'} />
+                        {key === 'client' && <ClientList type={'acc_id'} />}
                     </Tab>
                     <Tab eventKey="broker" title="Գործակալ">
-                        <BrokerList />
+                        {key === 'broker' && <BrokerList />}
                     </Tab>
                     {/*  */}
 
                     <Tab eventKey="lawyer" title="Իրավաբան"></Tab>
                     {/*  */}
                     <Tab eventKey="personal" title="Անձնական տվյալներ">
-                        <PersonalAccountant user={user} />
+                        {key === 'personal' && <PersonalAccountant user={user} />}
                     </Tab>
                 </Tabs>
 

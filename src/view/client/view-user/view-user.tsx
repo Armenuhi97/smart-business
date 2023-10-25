@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PersonalUserHook from "./hooks/personal-user.hook";
 import moment from "moment";
 import PersonalUser from "./components/personal";
@@ -12,6 +12,8 @@ import { Button } from "react-bootstrap";
 import AddAccountantForClient from './components/add-accountant/components/add-accountant';
 
 function ViewUser() {
+    const [key, setKey] = useState<string>("organization");
+
     const {
         dispatch,
         params,
@@ -33,19 +35,20 @@ function ViewUser() {
             {!!user &&
                 <div>
                     <Tabs
-                        defaultActiveKey="organization"
+                        // defaultActiveKey="organization"
                         id="uncontrolled-tab-example"
                         className="mb-3"
-                    // onSelect={(k) => changeTab(k)}
+                        activeKey={key}
+                        onSelect={(k) => setKey(k!)}
                     >
                         <Tab eventKey="organization" title="Կազմակերպություններ">
-                            <OrganizationList type={'client_id'} />
+                            {key === 'organization' && <OrganizationList type={'client_id'} />}
                         </Tab>
                         <Tab eventKey="staff" title="Աշխատակիցներ">
-                            <EmployeeList type={'client_id'} />
+                            {key === 'staff' && <EmployeeList type={'client_id'} />}
                         </Tab>
                         <Tab eventKey="personal" title="Անձնական տվյալներ">
-                            <PersonalUser user={user} />
+                            {key === 'personal' && <PersonalUser user={user} />}
                         </Tab>
                     </Tabs>
 

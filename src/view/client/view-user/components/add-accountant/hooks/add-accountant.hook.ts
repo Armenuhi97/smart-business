@@ -29,7 +29,7 @@ function AddAccountantForClientHook(clientId: number, editItem: any, setForm: an
         } else {
             const formObject: IAddAccountant = {
                 accountant: type === 'accountant' ? +form[type] : clientId,
-                client: type === 'accountant' ? clientId : form[type]
+                client: type === 'accountant' ? clientId : +form[type]
             }
 
             // if (!!editItem) {

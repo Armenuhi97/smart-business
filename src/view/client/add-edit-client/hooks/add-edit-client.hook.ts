@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IUser, UserDetail } from "../../models/user.model";
 import { ErrorMessage } from "../../../../utils/error";
 import { IAdd, IModify } from "../../../../models/action.model";
-import { addUser, getUserDetails } from "../../slice/client.slice";
+import { addUser, getUserDetails, modifyUser } from "../../slice/client.slice";
 import { Roles } from "../../../../utils/roles";
 
 function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: any, onSave?: (evt: { isEdit: boolean }) => void) {
@@ -78,9 +78,9 @@ function UserPersonalProps(setForm: any, form: any, dispatch: any, setErrors: an
                     id: editObject.id,
                     updateSuccessfully: handelOnSave
                 }
-                // dispatch(modifyUser(
-                //     sendingObject
-                // ));
+                dispatch(modifyUser(
+                    sendingObject
+                ));
             } else {
                 const sendingObject: IAdd<IUser> = {
                     sendData: formObject,
