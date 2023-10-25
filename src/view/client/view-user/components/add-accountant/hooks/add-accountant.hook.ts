@@ -3,7 +3,6 @@ import { IAdd } from "../../../../../../models/action.model";
 import { ErrorMessage } from "../../../../../../utils/error";
 import { IAddAccountant } from "../../../../models/add-accountant.model";
 import { addAccountantForClient } from "../../../../slice/all-clients.slice";
-import { getAccountantById } from "../../../../../accountant/slice/accountant.slice";
 import { UserDetail } from "../../../../models/user.model";
 import { getUserDetails } from "../../../../slice/client.slice";
 
@@ -63,10 +62,10 @@ function AddAccountantForClientHook(clientId: number, editItem: any, setForm: an
         onSave({ isEdit: !!editItem })
     }
     const checkAccountant = (): void => {
-        if (!form.accountant) {
+        if (!form[type]) {
             return;
         }
-        dispatch(getUserDetails(form.accountant)).then((data: any) => {
+        dispatch(getUserDetails(form[type])).then((data: any) => {
             if (data.error) {
                 setErrorMessage(`Նման ${title} գոյություն չունի`);
                 setAccountant(null);
@@ -81,7 +80,7 @@ function AddAccountantForClientHook(clientId: number, editItem: any, setForm: an
     }
     const resetForm = () => {
         setForm({
-            accountant: ''
+            [type]: ''
         });
         setIsCheck(false);
         setAccountant(null);
