@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IUser, UserDetail } from "../models/user.model";
 import { ServerResponse } from "../../../models/serve-response.model";
 import API, { pageCount } from "../../../services/API";
-import { IParams, ParamsWithId } from "../../../models/params.model";
+import { ParamsWithId } from "../../../models/params.model";
 import { getRoleRequest } from "../../../utils/request/request";
 import { Roles } from "../../../utils/roles";
 import moment from "moment";
-import { IAdd, IModify } from "../../../models/action.model";
+import { IAdd } from "../../../models/action.model";
 import { IAddAccountant } from "../models/add-accountant.model";
 
 const initialState: ServerResponse<UserDetail[]> = {

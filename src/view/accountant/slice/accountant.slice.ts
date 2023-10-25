@@ -12,7 +12,7 @@ const initialState: { accountant: IAccountant } = {
 export const getAccountantById = createAsyncThunk(
     'get/accountant-by-id/',
     async (id: number) => {
-        const response = await API.get(`accountant/${id}`)
+        const response = await API.get(`accountant/${id}/`)
         return response.data
     }
 )

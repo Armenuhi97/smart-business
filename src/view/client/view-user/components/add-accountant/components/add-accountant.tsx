@@ -5,7 +5,7 @@ import ModalContent from '../../../../../../components/modal-content/modal-conte
 import AddAccountantForClientHook from '../hooks/add-accountant.hook';
 
 
-export default memo(function AddAccountantForClient({clientId, editItem, show, onHide, onSave }: any) {
+export default memo(function AddAccountantForClient({ clientId, editItem, show, onHide, onSave, type, title }: any) {
     const {
         form,
         setForm,
@@ -14,32 +14,44 @@ export default memo(function AddAccountantForClient({clientId, editItem, show, o
         dispatch,
         setField,
         handleClose,
-    } = PopupHook<{ accountant: '' }>({ accountant: '' }, onHide);
+    } = PopupHook<any>({ [type]: '' }, onHide);
 
     const {
         handleSubmit,
         resetForm,
-    } = AddAccountantForClientHook(clientId,editItem, setForm, form, dispatch, setErrors, onSave)
+        isCheck,
+        checkAccountant,
+        accountant,
+        errorMessage
+    } = AddAccountantForClientHook(clientId, editItem, setForm, form, dispatch, setErrors, onSave,type, title)
 
 
     return (
-        <ModalContent show={show} title={'Կցել հաշվապահ'} handleClose={() => handleClose(resetForm)} onSave={handleSubmit}>
+        <ModalContent saveButtonText={(isCheck && accountant?.id == +form[type]) ? 'Պահպանել' : 'Ստուգել'} show={show} title={'Կցել ' + title}
+            handleClose={() => handleClose(resetForm)}
+            onSave={(isCheck && accountant?.id == +form[type]) ? handleSubmit : checkAccountant}>
+
+
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <div className='row'>
                         <div className='col'>
-                            <Form.Label>Հաշվապահ</Form.Label>
+                            <Form.Label>{title}</Form.Label>
                             <Form.Control
                                 type='number'
-                                value={form.accountant}
-                                onChange={e => setField('accountant', e.target.value)}
-                                isInvalid={!!errors?.accountant}
+                                value={form[type]}
+                                onChange={e => setField(type, e.target.value)}
+                                isInvalid={!!errors[type]}
                             />
-                            <Form.Control.Feedback type='invalid'>
-                                {errors?.accountant}
-                            </Form.Control.Feedback>
-                        </div>                       
-                    </div>                    
+                            {/* <Form.Control.Feedback type='invalid'>
+                                {errors[type]}
+                            </Form.Control.Feedback> */}
+                        </div>
+                    </div>
+                    <div className='row'>
+                        {accountant && <span>{type === 'accountant' ? accountant.company_name : accountant?.user?.first_name}</span>}
+                        {errorMessage && <span className='error-message'>{errorMessage}</span>}
+                    </div>
                 </Form.Group>
             </Form>
         </ModalContent>

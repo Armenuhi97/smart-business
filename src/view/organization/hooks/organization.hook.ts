@@ -9,23 +9,25 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
     search: string, dispatch: any, navigate: any, params: any, type: string) {
     const [organizations, setOrganization] = useState<IOrganization[]>([]);
     const [count, setCount] = useState<number>(0);
-
+    const [pageNumber, setPageNumber] = useState<number>(1);
     useEffect(() => {
         const queryPage = query.get("page");
         const searchValue = query.get("search");
         const currentSearch = searchValue ? searchValue : '';
         setSearch(currentSearch);
 
-        const currentPage = queryPage ? +queryPage : 1;
+        const currentPage = type ? pageNumber : queryPage ? +queryPage : 1;
+        
         setPage(currentPage);
 
         handleGetOrganizationList(currentPage, true, currentSearch);
-    }, [query]);
+    }, [query, pageNumber]);
 
-    const handleGetOrganizationList = useCallback((currentPage: number, isSetSearch?: boolean, searchValue: string = '') => {
+    const handleGetOrganizationList = useCallback((currentPage: number, isSetSearch?: boolean, searchValue: string = '') => {        
         let paramsObject: ParamsWithId = {
-            page: currentPage
+            page:currentPage
         }
+        
         paramsObject = {
             ...paramsObject,
             [type ? type : 'all']: params.id || 'true'
@@ -41,15 +43,21 @@ export function OrganizationProps(query: URLSearchParams, setSearch: any, setPag
             }
         });
 
-    }, [query, search, params]);
+    }, [query, search, params, pageNumber]);
 
     const handlePageClick = useCallback((e: {
         selected: number, isSetSearch?: boolean, searchValue?: string, isSetCategory?: boolean
     }) => {
-        navigate({
-            pathname: '.',
-            search: `?page=${e.selected + 1}&search=${e.isSetSearch ? e.searchValue : search}`,
-        });
+        const page = e.selected + 1;
+        if (!type) {
+            navigate({
+                pathname: '.',
+                search: `?page=${page}&search=${e.isSetSearch ? e.searchValue : search}`,
+            });
+        } else {
+            // setPage(page);
+            setPageNumber(page);
+        }
     }, [search]);
 
     return {

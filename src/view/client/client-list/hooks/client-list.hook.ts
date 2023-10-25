@@ -9,6 +9,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
     // const count: number = useAppSelector((state) => state.allUsers.count);
     const [users, setUsers] = useState<UserDetail[]>();
     const [count, setСount] = useState<number>();
+    const [pageNumber, setPageNumber] = useState<number>(1);
 
     const title = 'Հաճախորդներ';
     useEffect(() => {
@@ -21,11 +22,11 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         const currentSearch = searchValue ? searchValue : '';
         setSearch(currentSearch);
 
-        const currentPage = queryPage ? +queryPage : 1;
+        const currentPage = type ? pageNumber : queryPage ? +queryPage : 1;
         setPage(currentPage);
 
         handleGetUserList(currentPage, true, currentSearch);
-    }, [query]);
+    }, [query, pageNumber]);
 
     const goToUserPage = (user?: UserDetail | boolean) => {
         // navigate(`/dashboard/users/${typeof user === 'boolean' ? 'create' : user?.id}`, { replace: true });
@@ -64,16 +65,22 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
             }
         })
 
-    }, [query, search]);
+    }, [query, search, pageNumber]);
 
 
     const handlePageClick = useCallback((e: {
         selected: number, isSetSearch?: boolean, searchValue?: string, isSetCategory?: boolean
     }) => {
-        navigate({
-            pathname: '.',
-            search: `?page=${e.selected + 1}&search=${e.isSetSearch ? e.searchValue : search}`,
-        });
+        const page = e.selected + 1;
+        if (!type) {
+            navigate({
+                pathname: '.',
+                search: `?page=${page}&search=${e.isSetSearch ? e.searchValue : search}`,
+            });
+        } else {
+            setPageNumber(page);
+
+        }
     }, [search]);
 
     return {

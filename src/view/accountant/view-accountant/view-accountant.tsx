@@ -11,11 +11,16 @@ import BrokerList from "../../broker/broker-list/broker-list";
 import ListHook from "../../../utils/hooks/list.hook";
 import OrganizationList from "../../organization/component/organization-list/organization-list";
 import { UserDetail } from "../../client/models/user.model";
+import { Button } from "react-bootstrap";
+import AddAccountantForClient from '../../client/view-user/components/add-accountant/components/add-accountant';
 
 function ViewAccountant() {
     const {
         dispatch,
-        params
+        params,
+        setModalShow,
+        modalShow,
+        handleClose
     } = ListHook<UserDetail>();
     const {
         user,
@@ -23,37 +28,50 @@ function ViewAccountant() {
     } = PersonalUserHook<UserDetail>(params, dispatch);
     return (
         <div>
-            <h5>{user?.company_name}</h5>
-            <Tabs
-                defaultActiveKey="staff"
-                id="uncontrolled-tab-example"
-                className="mb-3"
-            // onSelect={(k) => changeTab(k)}
-            >
 
-                <Tab eventKey="staff" title="Աշխատակիցներ">
-                    <EmployeeList type={'acc_id'} />
-                </Tab>
-                <Tab eventKey="organization" title="Կազմակերպություններ">
-                    <OrganizationList type={'acc_id'} />
-                </Tab>
-                <Tab eventKey="client" title="Հաճախորդներ">
-                    <ClientList type={'acc_id'} />
-                </Tab>
-                <Tab eventKey="broker" title="Գործակալ">
-                    <BrokerList />
-                </Tab>
-                {/*  */}
+            <div className="d-flex align-items-center justify-content-between">
+                <h5>{user?.company_name}</h5>
+                <Button onClick={() => setModalShow!(true)} className="ml-2">Կցել հաճախորդ</Button>
+            </div>
 
-                <Tab eventKey="lawyer" title="Իրավաբան"></Tab>
-                {/*  */}
-                <Tab eventKey="personal" title="Անձնական տվյալներ">
-                    <PersonalAccountant user={user} />
-                </Tab>
-            </Tabs>
+            {user && <div>
+                <Tabs
+                    defaultActiveKey="staff"
+                    id="uncontrolled-tab-example"
+                    className="mb-3"
+                // onSelect={(k) => changeTab(k)}
+                >
+                    <Tab eventKey="staff" title="Աշխատակիցներ">
+                        <EmployeeList type={'acc_id'} />
+                    </Tab>
+                    <Tab eventKey="organization" title="Կազմակերպություններ">
+                        <OrganizationList type={'acc_id'} />
+                    </Tab>
+                    <Tab eventKey="client" title="Հաճախորդներ">
+                        <ClientList type={'acc_id'} />
+                    </Tab>
+                    <Tab eventKey="broker" title="Գործակալ">
+                        <BrokerList />
+                    </Tab>
+                    {/*  */}
+
+                    <Tab eventKey="lawyer" title="Իրավաբան"></Tab>
+                    {/*  */}
+                    <Tab eventKey="personal" title="Անձնական տվյալներ">
+                        <PersonalAccountant user={user} />
+                    </Tab>
+                </Tabs>
+
+                <AddAccountantForClient
+                    clientId={user.id}
+                    show={modalShow}
+                    onHide={handleClose}
+                    type={'client'}
+                    title={'Հաճախորդ'}
+                    onSave={(evt: any) => handleClose()}
+                />
+            </div>}
         </div>
-
-
     )
 }
 export default ViewAccountant;

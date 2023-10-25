@@ -1,32 +1,21 @@
+import { useState } from "react";
 import { IAdd } from "../../../../../../models/action.model";
 import { ErrorMessage } from "../../../../../../utils/error";
 import { IAddAccountant } from "../../../../models/add-accountant.model";
 import { addAccountantForClient } from "../../../../slice/all-clients.slice";
+import { getAccountantById } from "../../../../../accountant/slice/accountant.slice";
+import { UserDetail } from "../../../../models/user.model";
+import { getUserDetails } from "../../../../slice/client.slice";
 
-function AddAccountantForClientHook(clientId: number, editItem: any, setForm: any, form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void) {
-    // useEffect(() => {
-    //     if (!!editItem) {
-    //         const companyObj: any = {
-    //             name: editItem.name,
-    //             tin: editItem.tin,
-    //             image: editItem.image,
-    //             showImage: editItem.image ? baseUrl + editItem.image : '',
-    //             file: null,
-    //             address: editItem.address || [],
-    //             managers: editItem.managers || []
-    //         }
-
-    //         setForm({
-    //             ...form,
-    //             ...companyObj
-    //         })
-    //     }
-    // }, [editItem]);
+function AddAccountantForClientHook(clientId: number, editItem: any, setForm: any,
+    form: any, dispatch: any, setErrors: any, onSave: (evt: { isEdit: boolean }) => void, type: string, title: string) {
+    const [isCheck, setIsCheck] = useState<boolean>(false);
+    const [accountant, setAccountant] = useState<UserDetail | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const findFormErrors = () => {
-        const { accountant } = form;
-        const newErrors = {} as { accountant: string };
-        if (!accountant || accountant.trim() === '') newErrors.accountant = ErrorMessage.required;
+        const newErrors = {} as any;
+        if (!form[type]) newErrors[type] = ErrorMessage.required;
         return newErrors;
     }
 
@@ -40,8 +29,8 @@ function AddAccountantForClientHook(clientId: number, editItem: any, setForm: an
             setErrors(newErrors)
         } else {
             const formObject: IAddAccountant = {
-                accountant: +form.accountant,
-                client: clientId
+                accountant: type === 'accountant' ? +form[type] : clientId,
+                client: type === 'accountant' ? clientId : form[type]
             }
 
             // if (!!editItem) {
@@ -71,23 +60,41 @@ function AddAccountantForClientHook(clientId: number, editItem: any, setForm: an
 
     const handelOnSave = (): void => {
         resetForm();
-        // setTimeout(() => {
-        //     navigate({
-        //         pathname: '/dashboard/company'
-        //     });
-        // });
         onSave({ isEdit: !!editItem })
     }
-
+    const checkAccountant = (): void => {
+        if (!form.accountant) {
+            return;
+        }
+        dispatch(getUserDetails(form.accountant)).then((data: any) => {
+            if (data.error) {
+                setErrorMessage(`Նման ${title} գոյություն չունի`);
+                setAccountant(null);
+                setIsCheck(false);
+            }
+            if (data.payload) {
+                setErrorMessage('');
+                setIsCheck(true);
+                setAccountant(data.payload);
+            }
+        })
+    }
     const resetForm = () => {
         setForm({
             accountant: ''
-        })
+        });
+        setIsCheck(false);
+        setAccountant(null);
+        setErrorMessage('');
     }
 
     return {
         handleSubmit,
-        resetForm
+        resetForm,
+        isCheck,
+        checkAccountant,
+        accountant,
+        errorMessage
     }
 }
 export default AddAccountantForClientHook;

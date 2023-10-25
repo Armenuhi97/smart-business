@@ -53,7 +53,9 @@ function ViewUser() {
                         clientId={user.id}
                         show={modalShow}
                         onHide={handleClose}
-                    // onSave={(evt: any) => handleSave(evt, null, null)}
+                        type={'accountant'}
+                        title={'Հաշվապահ'}
+                        onSave={(evt: any) => handleClose()}
                     />
                 </div>
             }
