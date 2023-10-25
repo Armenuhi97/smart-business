@@ -6,6 +6,8 @@ import { IParams, ParamsWithId } from "../../../models/params.model";
 import { getRoleRequest } from "../../../utils/request/request";
 import { Roles } from "../../../utils/roles";
 import moment from "moment";
+import { IAdd, IModify } from "../../../models/action.model";
+import { IAddAccountant } from "../models/add-accountant.model";
 
 const initialState: ServerResponse<UserDetail[]> = {
     results: [],
@@ -20,6 +22,18 @@ export const getAllUsers = createAsyncThunk(
     }
 )
 
+export const addAccountantForClient = createAsyncThunk(
+    'get/add/accountant',
+    async (data: IAdd<IAddAccountant>) => {
+        const response = await API.post(`add-accountant/`, data.sendData);
+        if (response.status === 200 || response.status === 201) {
+            if (data.createSuccessfully)
+                data.createSuccessfully();
+        }
+        return response.data;
+    }
+)
+
 export const getMyClients = createAsyncThunk(
     'get/get-my-clients',
     async (data: ParamsWithId) => {
@@ -27,7 +41,7 @@ export const getMyClients = createAsyncThunk(
             params: {
                 ...data,
                 offset: (data.page - 1) * pageCount,
-                limit:pageCount
+                limit: pageCount
             }
         });
         return response.data

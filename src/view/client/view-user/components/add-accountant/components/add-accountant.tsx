@@ -1,54 +1,47 @@
-// import React from 'react';
-// import { Button, Form } from 'react-bootstrap';
-// import Title from '../../../../../../components/title/title';
-// import PopupHook from '../../../../../../utils/hooks/popup.hook';
+import React, { memo } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import PopupHook from '../../../../../../utils/hooks/popup.hook';
+import ModalContent from '../../../../../../components/modal-content/modal-content.component';
+import AddAccountantForClientHook from '../hooks/add-accountant.hook';
 
 
-// function AddAccountantForClient() {
-//     const {
-//         form,
-//         setForm,
-//         errors,
-//         setErrors,
-//         dispatch,
-//         setField,
-//         handleClose
-//     } = PopupHook<{ accountant: string }>({
-//         accountant: ''
-//     });
+export default memo(function AddAccountantForClient({clientId, editItem, show, onHide, onSave }: any) {
+    const {
+        form,
+        setForm,
+        errors,
+        setErrors,
+        dispatch,
+        setField,
+        handleClose,
+    } = PopupHook<{ accountant: '' }>({ accountant: '' }, onHide);
 
-//     const {
-//         handleSubmit,
-//         resetForm,
-//         id,
-//         user
-//     } = UserPersonalProps(setForm, form, dispatch, setErrors);
+    const {
+        handleSubmit,
+        resetForm,
+    } = AddAccountantForClientHook(clientId,editItem, setForm, form, dispatch, setErrors, onSave)
 
 
-//     return (
-//         <div>
-//             {!id && <Title title='Կցել հաշվապահ' isShowAdd={false} />}
-//             <Form className='mt-4' onSubmit={handleSubmit}>
-//                 <Form.Group >
-//                     <div className='row'>
-//                         <div className='col'>
-//                             <Form.Label>Անուն</Form.Label>
-//                             <Form.Control
-//                                 type='text'
-//                                 value={form.accountant || ''}
-//                                 onChange={e => setField('accountant', e.target.value)}
-//                                 isInvalid={!!errors?.accountant}
-//                             />
-//                             <Form.Control.Feedback type='invalid'>
-//                                 {errors?.accountant}
-//                             </Form.Control.Feedback>
-//                         </div>
-
-//                     </div>
-//                 </Form.Group>
-//                 <div className='mt-3 justify-content-center d-flex'><Button onClick={handleSubmit}>Պահպանել</Button></div>
-//             </Form>
-//         </div>
-//     )
-// }
-// export default AddEditClient;
+    return (
+        <ModalContent show={show} title={'Կցել հաշվապահ'} handleClose={() => handleClose(resetForm)} onSave={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                    <div className='row'>
+                        <div className='col'>
+                            <Form.Label>Հաշվապահ</Form.Label>
+                            <Form.Control
+                                type='number'
+                                value={form.accountant}
+                                onChange={e => setField('accountant', e.target.value)}
+                                isInvalid={!!errors?.accountant}
+                            />
+                            <Form.Control.Feedback type='invalid'>
+                                {errors?.accountant}
+                            </Form.Control.Feedback>
+                        </div>                       
+                    </div>                    
+                </Form.Group>
+            </Form>
+        </ModalContent>
+    )
+})
