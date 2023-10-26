@@ -8,7 +8,7 @@ function AccountantPopupProps(editItem: IAccountant | null, setForm: any, form: 
     useEffect(() => {
         if (!!editItem) {
             const accountant: IAccountant = {
-                email: editItem.email,
+                email: editItem?.user?.email || '',
                 phone_number: editItem.phone_number,
                 tin: editItem.tin,
                 company_name: editItem.company_name

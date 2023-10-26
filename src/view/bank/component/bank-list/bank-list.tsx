@@ -58,7 +58,7 @@ function BankList() {
                             <tr key={bank.id}>
                                 <td width={20}>{(ind + 1) + ((page - 1) * pageCount)}</td>
                                 <td>{bank.name}</td>
-                                <td><img height={30} width={30} src={baseUrl + bank.icon} /></td>
+                                <td><img className="object-fit-contain" height={30} width={30} src={baseUrl + bank.icon} /></td>
                                 <td width={30}><div onClick={() => { openModalForEditItem(bank) }} className='action-btn'><AiIcons.AiOutlineEdit /> </div></td>
                                 <td width={30}><span onClick={() => handelOpenDeleteConfirmModal(bank.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
                             </tr>
