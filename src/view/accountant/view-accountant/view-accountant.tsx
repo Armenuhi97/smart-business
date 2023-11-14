@@ -45,7 +45,7 @@ function ViewAccountant() {
                 // onSelect={(k) => changeTab(k)}
                 >
                     <Tab eventKey="staff" title="Աշխատակիցներ">
-                        {key === 'staff' && <EmployeeList type={'acc_id'} />}
+                        {key === 'staff' && <EmployeeList type={'client_id'} />}
                     </Tab>
                     <Tab eventKey="organization" title="Կազմակերպություններ">
                         {key === 'organization' && <OrganizationList type={'acc_id'} />}
