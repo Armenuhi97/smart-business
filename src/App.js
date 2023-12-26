@@ -28,6 +28,9 @@ import OrganizationList from './view/organization/component/organization-list/or
 import Bank from './view/bank/bank';
 import BankList from './view/bank/component/bank-list/bank-list';
 
+import InviteList from './view/removeInvite/invite.tsx';
+
+
 function App() {
   return (
     <div className="App">
@@ -77,6 +80,8 @@ function App() {
             <Route path="" element={<Navigate to="list" />} />
             <Route path='list' element={<BankList />}></Route>
           </Route>
+          <Route path="invites" element={<InviteList />} />
+
         </Route>
         {/* <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate replace to="/404" />} /> */}

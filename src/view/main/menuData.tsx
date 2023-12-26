@@ -34,6 +34,12 @@ export const AdminData = [
     cName: "nav-text"
   },
   {
+    title: 'Ջնջելու հայտեր',
+    path: `${mainRoute}/invites`,
+    icon: <GiIcons.GiPostOffice />,
+    cName: "nav-text"
+  },
+  {
     title: 'Կազմակերպություններ',
     path: `${mainRoute}/organization`,
     icon: <GiIcons.GiPostOffice />,
