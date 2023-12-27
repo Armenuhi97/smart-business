@@ -46,8 +46,7 @@ function InviteList() {
                 <thead>
                     <tr>
                         <th>N</th>
-                        <th>Անուն</th>
-                        <th>Ազգանուն</th>
+                        <th>Անուն Ազգանուն / Կազմ․</th>
                         <th>Հեռ․</th>
                         <th>Էլ․հասցե</th>
                         <th>Տեսակ</th>
@@ -59,8 +58,11 @@ function InviteList() {
                         return (
                             <tr key={invite.id}>
                                 <td>{(ind + 1) + ((page - 1) * pageCount)}</td>
-                                <td>{invite.user.user.first_name}</td>
-                                <td>{invite.user.user.last_name}</td>
+                                <td>
+                                    {invite.user.user_role !== 1 ? `${invite.user.user.first_name} ${invite.user.user.last_name}` :
+                                        `${invite.user.company_name}`
+                                    }
+                                </td>
                                 <td>{invite.user.phone_number}</td>
                                 <td>{invite.user?.user.email}</td>
                                 <td>{InviteStatus[invite.type]}</td>
