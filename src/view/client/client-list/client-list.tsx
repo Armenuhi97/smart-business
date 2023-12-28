@@ -37,7 +37,7 @@ function ClientList({ type }: { type: string }) {
 
     return (
         <div>
-            <Title title={title} isShowAdd={true} setModalShow={goToUserPage} />
+            <Title title={title} isShowAdd={true} handlePageClick={handlePageClick} search={search} isSearch={!type ? true : false} setModalShow={goToUserPage} />
 
             {!!users?.length && <Table className='mt-2' striped bordered hover>
                 <thead>

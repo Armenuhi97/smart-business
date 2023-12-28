@@ -11,7 +11,7 @@ import DeleteConfirmModal from '../../../components/delete-confim/delete-confirm
 import { deleteAccountant } from "../slice/accountant.slice";
 import AddEditAccountant from "../add-edit-client/add-edit-accountant";
 
-function AccountantList() {
+function AccountantList({ type }: { type?: string }) {
     const {
         page,
         setPage,
@@ -43,7 +43,7 @@ function AccountantList() {
 
     return (
         <div>
-            <Title title={title} isShowAdd={true} setModalShow={setModalShow} />
+            <Title title={title} isShowAdd={true} handlePageClick={handlePageClick} search={search}  isSearch={!type ? true : false}  setModalShow={setModalShow} />
 
             {!!accountant?.length && <Table className='mt-2' striped bordered hover>
                 <thead>

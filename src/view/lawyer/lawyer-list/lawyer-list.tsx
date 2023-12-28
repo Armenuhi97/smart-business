@@ -11,7 +11,7 @@ import { ILawyer } from "../models/lawyer.model";
 import LawyerListProps from "./hooks/lawyer-list.hook";
 import AddEditLawyer from "../add-edit-lawyer/add-edit-lawyer";
 
-function LawyerList() {
+function LawyerList({ type }: { type?: string }) {
     const {
         page,
         setPage,
@@ -43,7 +43,7 @@ function LawyerList() {
 
     return (
         <div>
-            <Title title={title} isShowAdd={true} setModalShow={setModalShow} />
+            <Title title={title} isShowAdd={true}  handlePageClick={handlePageClick} search={search}  isSearch={!type ? true : false}  setModalShow={setModalShow} />
 
             {!!lawyers?.length && <Table className='mt-2' striped bordered hover>
                 <thead>

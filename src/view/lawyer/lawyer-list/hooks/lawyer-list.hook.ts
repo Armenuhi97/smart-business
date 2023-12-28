@@ -34,7 +34,7 @@ export function LawyerListProps(query: URLSearchParams, setSearch: any, setPage:
 
         const params = {
             page: currentPage,
-            // query: isSetSearch ? searchValue : search,
+            search: isSetSearch ? searchValue : search
             // roleId: roleParams.roleId
         }
         dispatch(getAllLawyer(params));

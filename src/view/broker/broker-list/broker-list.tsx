@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Title from "../../../components/title/title";
 import { Table } from "react-bootstrap";
 import Paginate from "../../../components/pagination/pagination";
@@ -11,7 +11,7 @@ import BrokerListProps from "./hooks/broker-list.hook";
 import AddEditBroker from "../add-edit-broker/add-edit-broker";
 import { deleteBroker } from "../slice/broker.slice";
 
-function BrokerList() {
+function BrokerList({ type }: { type?: string }) {
     const {
         page,
         setPage,
@@ -43,7 +43,8 @@ function BrokerList() {
 
     return (
         <div>
-            <Title title={title} isShowAdd={true} setModalShow={setModalShow} />
+            <Title title={title} isShowAdd={true} handlePageClick={handlePageClick} search={search}  isSearch={!type ? true : false}  setModalShow={setModalShow} />
+            {/* <Search search={search} onSearch={(e) => handlePageClick({ selected: 0, isSetSearch: true, searchValue: e })} /> */}
 
             {!!brokers?.length && <Table className='mt-2' striped bordered hover>
                 <thead>

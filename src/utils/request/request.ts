@@ -8,8 +8,8 @@ export async function getRoleRequest(data: any, roleId: number) {
                 // take: data.isAll ? 100 : pageCount,
                 page:data.page,
                 limit: pageCount,
-                offset: (data.page - 1) * pageCount
-                // query: data.query,
+                offset: (data.page - 1) * pageCount,
+                search: data?.search || '',
                 // role: data.roleId
             }
         })

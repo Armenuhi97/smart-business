@@ -40,7 +40,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         searchValue: string = '') => {
         let reqParams: ParamsWithId = {
             page: currentPage,
-            // query: isSetSearch ? searchValue : search,
+            search: isSetSearch ? searchValue : search,
             // roleId: roleParams.roleId
         }
         let request;
@@ -76,7 +76,7 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
             });
         } else {
             setPageNumber(page);
-
+            // setSearch(search);
         }
     }, [search]);
 

@@ -36,6 +36,7 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
 
         const params = {
             page: currentPage,
+            search: isSetSearch ? searchValue : search
             // query: isSetSearch ? searchValue : search,
             // roleId: roleParams.roleId
         }
