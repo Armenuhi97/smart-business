@@ -3,7 +3,7 @@ import '../styles/loading.scss';
 import { toast } from 'react-toastify';
 import { ErrorMessage } from "../utils/error";
 
-export const baseUrl = 'http://business-api.annaniks.com/';
+export const baseUrl = 'https://business-api.annaniks.com/';
 const API = axios.create({
     baseURL: baseUrl,
     responseType: 'json'
