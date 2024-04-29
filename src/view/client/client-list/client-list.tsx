@@ -4,11 +4,12 @@ import { Table } from "react-bootstrap";
 import Paginate from "../../../components/pagination/pagination";
 import { IUser, UserDetail } from "../models/user.model";
 import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
 import UserListProps from "./hooks/client-list.hook";
 import ListHook from "../../../utils/hooks/list.hook";
 import { pageCount } from "../../../services/API";
 import DeleteConfirmModal from '../../../components/delete-confim/delete-confirm.component';
-import { deleteUser } from "../slice/client.slice";
+import { deleteUser, modifyUser } from "../slice/client.slice";
 
 function ClientList({ type }: { type: string }) {
     const {
@@ -23,7 +24,8 @@ function ClientList({ type }: { type: string }) {
         handelOpenDeleteConfirmModal,
         handleCloseDeleteModal,
         handleDeleteItem,
-        deleteModalShow
+        deleteModalShow,
+        deleteRestoreUser
     } = ListHook<UserDetail>();
     const {
         users,
@@ -63,7 +65,10 @@ function ClientList({ type }: { type: string }) {
                                 <td>{user.user.email}</td>
                                 <td>{user?.manager_count}</td>
                                 <td><span onClick={() => { goToUserPage(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
-                                <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
+                                <td>
+                                    <span onClick={() => handelOpenDeleteConfirmModal(user.id!, user.is_deleted, user)} className='action-btn red'>
+                                        {user.is_deleted ? <FaIcons.FaTrashRestore /> : <AiIcons.AiOutlineDelete />} </span>
+                                </td>
                                 <td><span onClick={() => { goToViewPage(user.id!) }} className='action-btn'><AiIcons.AiOutlineEye /> </span></td>
 
                             </tr>
@@ -73,11 +78,12 @@ function ClientList({ type }: { type: string }) {
             </Table>
             }
             {!!users?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count! / pageCount)} />}
+          {/* Դուք ցանկանու՞մ եք ջնջել այս հաճախորդին */}
             <DeleteConfirmModal
-                text='Դուք ցանկանու՞մ եք ջնջել այս հաճախորդին'
+                text=''
                 show={deleteModalShow}
                 handleClose={handleCloseDeleteModal}
-                onSave={() => handleDeleteItem(users!, handleGetUserList, handlePageClick, deleteUser)}
+                onSave={() => deleteRestoreUser(modifyUser)}
             />
         </div>
     )

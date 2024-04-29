@@ -28,6 +28,10 @@ import OrganizationList from './view/organization/component/organization-list/or
 import Bank from './view/bank/bank';
 import BankList from './view/bank/component/bank-list/bank-list';
 
+import Measurement from './view/measunment/measurement.tsx';
+import MeasurementList from './view/measunment/component/measurement-list/measurement-list';
+
+
 import InviteList from './view/removeInvite/invite.tsx';
 
 
@@ -81,6 +85,11 @@ function App() {
             <Route path='list' element={<BankList />}></Route>
           </Route>
           <Route path="invites" element={<InviteList />} />
+
+          <Route path="measurement" element={<Measurement />}>
+            <Route path="" element={<Navigate to="list" />} />
+            <Route path='list' element={<MeasurementList />} />
+          </Route>
 
         </Route>
         {/* <Route path="/404" element={<NotFound />} />

@@ -14,7 +14,7 @@ export const AdminData = [
     icon: <AiIcons.AiOutlineUser />,
     cName: "nav-text"
   },
-    {
+  {
     title: 'Հաշվապահ',
     path: `${mainRoute}/accountant`,
     icon: <FaIcons.FaToiletPaper />,
@@ -55,12 +55,16 @@ export const AdminData = [
         title: "Բանկ",
         path: `${mainRoute}/bank`,
       },
+      {
+        title: "Չափումներ",
+        path: `${mainRoute}/measurement`
+      },
     ]
   },
   {
     title: "Ելք",
     icon: <BiIcons.BiLogOut />,
-    path:'/auth',
+    path: '/auth',
     cName: "nav-text"
   },
 ];

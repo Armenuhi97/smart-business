@@ -2,7 +2,8 @@ import { useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
 import useQuery from "../use-query.params";
-import { IDelete } from "../../models/action.model";
+import { IDelete, IModify } from "../../models/action.model";
+import { IUser } from "../../view/client/models/user.model";
 
 export function ListHook<T>() {
     const query = useQuery();
@@ -11,6 +12,9 @@ export function ListHook<T>() {
     const [modalShow, setModalShow] = useState<boolean>(false);
     const [deleteModalShow, setDeleteModalShow] = useState<boolean>(false);
     const [deleteItemId, setDeleteItemId] = useState<string | number | null>(null);
+    const [isDeleted, setIsDeleted] = useState<boolean>(false);
+    const [deleteUser, setDeleteUser] = useState<T | null>(null);
+
     const [editItem, setEditItem] = useState<T | null>(null);
     const [search, setSearch] = useState<string>('');
 
@@ -41,21 +45,47 @@ export function ListHook<T>() {
     const handleCloseDeleteModal = useCallback(() => {
         setDeleteItemId(null);
         setDeleteModalShow(false);
+        setIsDeleted(false);
+        setDeleteUser(null);
     }, []);
 
     const handleDeleteItem = useCallback((items: T[], getList: (page: number) => void, handlePageClick: (e: any) => void, data: any) => {
+        handleCloseDeleteModal();
         const deleteParams: IDelete = {
             id: deleteItemId!,
             page,
             deleteSuccessfully: items.length === 1 && page !== 1 ? (page) => handlePageClick({ selected: page - 2 }) : (page) => getList(page)
         };
-        handleCloseDeleteModal();
-        dispatch(data(deleteParams))
+        dispatch(data(deleteParams));
     }, [page, deleteItemId])
 
-    const handelOpenDeleteConfirmModal = (id: string | number) => {
+
+    const deleteRestoreUser = useCallback((modify: any) => {
+        handleCloseDeleteModal();
+        deleteRestoreUserRequest(modify, { is_deleted: !isDeleted })
+    }, [isDeleted, deleteUser, deleteItemId]);
+
+
+    const deleteRestoreUserRequest = useCallback((data: any, obj: any) => {
+        const sendingObject: IModify<T> = {
+            sendObject: {
+                ...deleteUser,
+                ...obj
+            },
+            id: deleteItemId!
+        }
+        dispatch(data(
+            sendingObject
+        ));
+    }, [isDeleted, deleteUser, deleteItemId]);
+
+    const handelOpenDeleteConfirmModal = (id: string | number, isDeleted = false, user?: T) => {
         setDeleteItemId(id);
         setDeleteModalShow(true);
+        setIsDeleted(isDeleted);
+        if (!!user) {
+            setDeleteUser(user);
+        }
     }
     const openModalForEditItem = (item: T) => {
         setEditItem(item);
@@ -79,7 +109,8 @@ export function ListHook<T>() {
         handleDeleteItem,
         handelOpenDeleteConfirmModal,
         openModalForEditItem,
-        params
+        params,
+        deleteRestoreUser
     }
 }
 export default ListHook;

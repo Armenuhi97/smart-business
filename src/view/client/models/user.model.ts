@@ -27,8 +27,9 @@ export interface IUser {
     birth_date?: string | Date;
     id?: number;
     password?: string;
+    is_deleted?: boolean;
 }
 
-export interface UserModel{
-    
+export interface UserModel {
+
 }
