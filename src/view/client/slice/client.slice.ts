@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { IUser } from "../models/user.model";
 import API from "../../../services/API";
 import { IAdd, IDelete, IModify } from "../../../models/action.model";
+import { ServerResponse } from "../../../models/serve-response.model";
 
 
 const initialState: { user: IUser } = {

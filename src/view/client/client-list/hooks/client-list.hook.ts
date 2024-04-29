@@ -80,6 +80,18 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         }
     }, [search]);
 
+    const changeIsDeletedKey = useCallback((id: number, is_deleted: boolean) => {        
+        const usersList = users?.map((data) => {            
+            if (data.id === id) {
+                return {
+                    ...data,
+                    is_deleted
+                }
+            }
+            return data;
+        })        
+        setUsers(usersList);
+    }, [users])
     return {
         users,
         count,
@@ -87,7 +99,8 @@ export function UserListProps(query: URLSearchParams, setSearch: any, setPage: a
         handlePageClick,
         goToUserPage,
         title,
-        goToViewPage
+        goToViewPage,
+        changeIsDeletedKey
     }
 }
 

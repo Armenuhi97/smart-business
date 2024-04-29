@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IUser, UserDetail } from "../models/user.model";
 import { ServerResponse } from "../../../models/serve-response.model";
 import API, { pageCount } from "../../../services/API";
@@ -51,7 +51,22 @@ export const getMyClients = createAsyncThunk(
 const allUsersSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        isDeletedAction: (state: ServerResponse<UserDetail[]>, action: PayloadAction<{ id: number | string, is_deleted: boolean }>) => {
+            state.results = state.results.map((data: UserDetail) => {
+                if (data.id === action.payload.id) {
+
+                    return {
+                        ...data,
+                        is_deleted: action.payload.is_deleted
+                    }
+                }
+                return data;
+            })
+
+            return state;
+        }
+    },
     extraReducers(builder) {
         builder.addCase(getAllUsers.fulfilled, (state, action) => {
             state.results = action.payload.results.map((el: IUser) => {
@@ -66,3 +81,4 @@ const allUsersSlice = createSlice({
 });
 
 export default allUsersSlice.reducer;
+export const { isDeletedAction } = allUsersSlice.actions;
