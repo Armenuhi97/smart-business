@@ -8,5 +8,6 @@ export interface IAccountant {
     tin: string;
     user_count?: number;
     password?: string;
-    user?:IUser;
+    user?: IUser;
+    is_acc_active?: boolean;
 }

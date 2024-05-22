@@ -44,8 +44,8 @@ export const deleteAccountant = createAsyncThunk(
 )
 export const modifyAccountant = createAsyncThunk(
     'modify/accountant',
-    async (data: IModify<IAccountant>) => {
-        const response = await API.put(`accountant/edit/${data.id}`, data.sendObject);
+    async (data: IModify<IAccountant | {is_acc_active:boolean}>) => {
+        const response = await API.put(`edit-user/${data.id}/`, data.sendObject);
         if (response.status === 200 || response.status === 201) {
 
             if (data.updateSuccessfully)

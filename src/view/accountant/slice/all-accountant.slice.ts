@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IAccountant } from "../models/accountant.model";
 import { ServerResponse } from "../../../models/serve-response.model";
 import API, { pageCount } from "../../../services/API";
@@ -22,13 +22,27 @@ export const getAllAccountant = createAsyncThunk(
 const allAccountantSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        isActive: (state: ServerResponse<IAccountant[]>, action: PayloadAction<{ id: number }>) => {
+            state.results = state.results.map((data: IAccountant) => {
+                if (data.id === action.payload.id) {
+                    return {
+                        ...data,
+                        is_acc_active: !data.is_acc_active
+                    }
+                } else {
+                    return data;
+                }
+            })
+            return state;
+        }
+    },
     extraReducers(builder) {
-        builder.addCase(getAllAccountant.fulfilled, (state, action) => {            
+        builder.addCase(getAllAccountant.fulfilled, (state, action) => {
             state.results = action.payload.results;
             state.count = action.payload.count;
         })
     },
 });
-
+export const { isActive } = allAccountantSlice.actions;
 export default allAccountantSlice.reducer;

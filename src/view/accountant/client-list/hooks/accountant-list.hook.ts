@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IAccountant } from "../../models/accountant.model";
 import { useAppSelector } from "../../../../hooks";
 import { getAllAccountant } from "../../slice/all-accountant.slice";
+import { modifyAccountant } from "../../slice/accountant.slice";
 
 export function AccountantListProps(query: URLSearchParams, setSearch: any, setPage: any, search: string, dispatch: any, navigate: any, roleParams: any) {
     const accountant: IAccountant[] = useAppSelector((state) => state.allAccountant.results);
@@ -56,7 +57,15 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
             search: `?page=${e.selected + 1}&search=${e.isSetSearch ? e.searchValue : search}`,
         });
     }, [search]);
-
+    const changeIsActive = (data: IAccountant) => {
+        const sendingObject = {
+            sendObject: {
+                is_acc_active: !data.is_acc_active
+            },
+            id: data.id
+        }
+        dispatch(modifyAccountant(sendingObject));
+    }
     return {
         accountant,
         count,
@@ -64,7 +73,8 @@ export function AccountantListProps(query: URLSearchParams, setSearch: any, setP
         handlePageClick,
         goToUserPage,
         title,
-        goToViewPage
+        goToViewPage,
+        changeIsActive
     }
 }
 

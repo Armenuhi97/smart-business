@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Title from "../../../components/title/title";
-import { Table } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
 import Paginate from "../../../components/pagination/pagination";
 import { IAccountant } from "../models/accountant.model";
 import * as AiIcons from "react-icons/ai";
@@ -10,6 +10,7 @@ import { pageCount } from "../../../services/API";
 import DeleteConfirmModal from '../../../components/delete-confim/delete-confirm.component';
 import { deleteAccountant } from "../slice/accountant.slice";
 import AddEditAccountant from "../add-edit-client/add-edit-accountant";
+import { isActive } from "../slice/all-accountant.slice";
 
 function AccountantList({ type }: { type?: string }) {
     const {
@@ -38,12 +39,13 @@ function AccountantList({ type }: { type?: string }) {
         handleGetAccountantList,
         handlePageClick,
         title,
-        goToViewPage
+        goToViewPage,
+        changeIsActive
     } = AccountantListProps(query, setSearch, setPage, search, dispatch, navigate, params);
 
     return (
         <div>
-            <Title title={title} isShowAdd={true} handlePageClick={handlePageClick} search={search}  isSearch={!type ? true : false}  setModalShow={setModalShow} />
+            <Title title={title} isShowAdd={true} handlePageClick={handlePageClick} search={search} isSearch={!type ? true : false} setModalShow={setModalShow} />
 
             {!!accountant?.length && <Table className='mt-2' striped bordered hover>
                 <thead>
@@ -54,6 +56,7 @@ function AccountantList({ type }: { type?: string }) {
                         <th>Էլ․հասցե</th>
                         <th>Հեռ․</th>
                         <th>հաճախորդների քանակ</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -69,6 +72,18 @@ function AccountantList({ type }: { type?: string }) {
                                 <td>{user.user?.email}</td>
                                 <td>{user.phone_number}</td>
                                 <td>{user.user_count}</td>
+                                <td>
+                                    <Form.Check type='switch'
+                                        checked={user.is_acc_active}
+                                        onChange={() => {
+                                            dispatch(isActive({
+                                                id: user.id!
+                                            }))
+                                            changeIsActive(user)
+                                        }}
+                                        id={`check-api-${user.id}`}>
+                                    </Form.Check>
+                                </td>
                                 <td><span onClick={() => { openModalForEditItem(user) }} className='action-btn'><AiIcons.AiOutlineEdit /> </span></td>
                                 <td><span onClick={() => handelOpenDeleteConfirmModal(user.id!)} className='action-btn red'><AiIcons.AiOutlineDelete /> </span></td>
                                 <td><span onClick={() => { goToViewPage(user.id!) }} className='action-btn'><AiIcons.AiOutlineEye /> </span></td>
@@ -80,19 +95,21 @@ function AccountantList({ type }: { type?: string }) {
             </Table>
             }
             {!!accountant?.length && <Paginate page={page} handlePageClick={handlePageClick} count={Math.ceil(count! / pageCount)} />}
-            {<DeleteConfirmModal
-                text='Դուք ցանկանու՞մ եք ջնջել այս հաշվապահին'
-                show={deleteModalShow}
-                handleClose={handleCloseDeleteModal}
-                onSave={() => handleDeleteItem(accountant!, handleGetAccountantList, handlePageClick, deleteAccountant)}
-            />}
+            {
+                <DeleteConfirmModal
+                    text='Դուք ցանկանու՞մ եք ջնջել այս հաշվապահին'
+                    show={deleteModalShow}
+                    handleClose={handleCloseDeleteModal}
+                    onSave={() => handleDeleteItem(accountant!, handleGetAccountantList, handlePageClick, deleteAccountant)}
+                />
+            }
             <AddEditAccountant
                 editItem={editItem}
                 show={modalShow}
                 onHide={handleClose}
                 onSave={(evt: any) => handleSave(evt, handleGetAccountantList, handlePageClick)}
             />
-        </div>
+        </div >
     )
 }
 export default AccountantList;
